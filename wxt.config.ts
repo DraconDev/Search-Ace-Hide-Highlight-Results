@@ -1,11 +1,13 @@
 import { defineConfig } from "wxt";
+import react from '@vitejs/plugin-react';
+
 // See https://wxt.dev/api/config.html
 export default defineConfig({
     extensionApi: "chrome",
     manifest: {
         name: "Example Extension",
         description: "Example Extension",
-        version: "1.1.0",
+        version: "0.0.1",
         permissions: ["storage"],
         icons: {
             "16": "icon/16.png",
@@ -25,5 +27,9 @@ export default defineConfig({
             default_title: "",
         },
     },
+    browser: ["chrome", "firefox"],
     modules: ["@wxt-dev/module-react"],
+    vite: {
+        plugins: [react()]
+    }
 });
