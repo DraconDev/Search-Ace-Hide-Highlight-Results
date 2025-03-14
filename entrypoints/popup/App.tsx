@@ -23,7 +23,7 @@ function App() {
 
   return (
     <>
-      <div className="min-h-screen p-4 bg-gray-100 color-red-900">hello</div>
+      <div className="min-h-screen p-4 bg-gray-100 red-900">hello</div>
     </>
   );
 }
