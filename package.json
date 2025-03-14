@@ -2,10 +2,10 @@
   "name": "wxt-react-starter",
   "description": "manifest.json description",
   "private": true,
-  "version": "0.0.30",
+  "version": "0.0.31",
   "type": "module",
   "scripts": {
-    "dev": "CHROME_PATH=/usr/bin/google-chrome wxt",
+    "dev": "wxt",
     "dev:firefox": "wxt -b firefox",
     "build": "wxt build",
     "build:firefox": "wxt build -b firefox",
