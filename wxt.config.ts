@@ -1,12 +1,12 @@
 import { defineConfig } from "wxt";
 // See https://wxt.dev/api/config.html
 export default defineConfig({
-  extensionApi: "webextension", // Changed from "chrome" to "webextension" for better Firefox compatibility
+  extensionApi: "webextension-polyfill", // Corrected from "webextension" to "webextension-polyfill"
   browser: ["chrome", "firefox"], // Add Firefox as a target browser
   manifest: {
     name: "Example Extension",
     description: "Example Extension",
-    version: "0.0.4",
+    version: "0.0.5",
     permissions: ["storage"],
     icons: {
       "16": "icon/16.png",
