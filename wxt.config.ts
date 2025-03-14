@@ -1,12 +1,11 @@
 import { defineConfig } from "wxt";
 // See https://wxt.dev/api/config.html
 export default defineConfig({
-  extensionApi: "webextension-polyfill",
-  browser: ["chrome", "firefox"], // Add this line to target both browsers
+  extensionApi: "webextension-polyfill", // Corrected from "webextension" to "webextension-polyfill"
   manifest: {
     name: "Example Extension",
     description: "Example Extension",
-    version: "0.0.7",
+    version: "0.0.8",
     permissions: ["storage"],
     icons: {
       "16": "icon/16.png",
