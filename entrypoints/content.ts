@@ -1,4 +1,3 @@
-import '../assets/style.css';
 import { defineContentScript } from "wxt/sandbox";
 
 export default defineContentScript({

@@ -1,11 +1,11 @@
 import { defineConfig } from "wxt";
 // See https://wxt.dev/api/config.html
 export default defineConfig({
-  extensionApi: "webextension-polyfill",
+  extensionApi: "webextension-polyfill", // Corrected from "webextension" to "webextension-polyfill"
   manifest: {
     name: "Example Extension",
     description: "Example Extension",
-    version: "0.0.50",
+    version: "0.0.51",
     permissions: ["storage"],
     icons: {
       "16": "icon/16.png",
@@ -26,15 +26,4 @@ export default defineConfig({
     },
   },
   modules: ["@wxt-dev/module-react"],
-  // Add vite configuration to properly handle PostCSS
-  vite: {
-    css: {
-      postcss: {
-        plugins: [
-          require('tailwindcss'),
-          require('autoprefixer'),
-        ],
-      },
-    },
-  },
 });
