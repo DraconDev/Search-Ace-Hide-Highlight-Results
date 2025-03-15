@@ -1,20 +1,12 @@
 import { defineConfig } from "wxt";
 // See https://wxt.dev/api/config.html
 export default defineConfig({
-  extensionApi: "webextension-polyfill",
-  browser: ["chrome", "firefox"], // Explicitly target Firefox
+  extensionApi: "webextension-polyfill", // Corrected from "webextension" to "webextension-polyfill"
   manifest: {
     name: "Example Extension",
     description: "Example Extension",
-    version: "0.0.43",
+    version: "0.0.44",
     permissions: ["storage"],
-    // Add browser_specific_settings for Firefox
-    browser_specific_settings: {
-      gecko: {
-        id: "{example-extension@yourdomain.com}", // Required for Firefox - choose a unique ID
-        strict_min_version: "109.0" // Minimum Firefox version that supports your extension
-      }
-    },
     icons: {
       "16": "icon/16.png",
       "32": "icon/32.png",
