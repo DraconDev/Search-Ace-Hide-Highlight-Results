@@ -5,7 +5,7 @@ export default defineConfig({
   manifest: {
     name: "Example Extension",
     description: "Example Extension",
-    version: "0.0.56",
+    version: "0.0.57",
     permissions: ["storage"],
     icons: {
       "16": "icon/16.png",
@@ -14,10 +14,10 @@ export default defineConfig({
       "96": "icon/96.png",
       "128": "icon/128.png",
     },
-  },
-  browser_specific_settings: {
-    gecko: {
-      id: "random_id",
+    browser_specific_settings: {
+      gecko: {
+        id: "random_id",
+      },
     },
   },
   modules: ["@wxt-dev/module-react"],
