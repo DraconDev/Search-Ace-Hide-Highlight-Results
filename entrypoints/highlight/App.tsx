@@ -115,7 +115,7 @@ function App() {
                   className="inline-block w-8 h-8 border-2 border-gray-500 rounded-full"
                   style={{ backgroundColor: color }}
                 />
-                <span className="text-base font-mono truncate max-w-[220px] text-gray-100">
+                <span className="font-mono text-base text-gray-100">
                   {pattern}
                 </span>
               </div>
