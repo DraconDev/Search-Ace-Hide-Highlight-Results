@@ -148,7 +148,7 @@ function App() {
                 patternInput.value = "";
               }
             }}
-            className="px-3 py-1 text-white bg-blue-500 rounded"
+            className="px-3 py-1 text-white bg-blue-700 rounded hover:bg-blue-600 hover:text-white"
           >
             Add
           </button>
