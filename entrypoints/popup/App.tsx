@@ -164,7 +164,7 @@ function App() {
                   {pattern}
                 </span>
                 <span
-                  className="inline-block w-5 h-5 border-2 border-gray-600 rounded-full"
+                  className="inline-block w-5 h-5 border-2 border-gray-500 rounded-full"
                   style={{ backgroundColor: color }}
                 />
               </div>
