@@ -163,17 +163,19 @@ function App() {
                 <span className="text-sm font-mono truncate max-w-[180px] text-gray-100">
                   {pattern}
                 </span>
+              </div>
+              <div className="flex items-center gap-2">
                 <span
                   className="inline-block w-5 h-5 border-2 border-gray-500 rounded-full"
                   style={{ backgroundColor: color }}
                 />
+                <button
+                  onClick={() => removeHighlightedPattern(pattern)}
+                  className="px-2 py-1 text-red-400 transition-colors rounded-md hover:bg-red-900 hover:text-red-200"
+                >
+                  Remove
+                </button>
               </div>
-              <button
-                onClick={() => removeHighlightedPattern(pattern)}
-                className="px-2 py-1 text-red-400 transition-colors rounded-md hover:bg-red-900 hover:text-red-200"
-              >
-                Remove
-              </button>
             </li>
           ))}
         </ul>
