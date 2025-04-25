@@ -13,7 +13,7 @@ export default defineContentScript({
       if (suspended) return;
 
       // Get all search result elements - try multiple selectors for different Google layouts
-      const results = document.querySelectorAll(".MjjYud > div.g");
+      const results = document.querySelectorAll("div.g, .g, .tF2Cxc, .MjjYud");
 
       results.forEach((result) => {
         const resultElement = result as HTMLElement;
@@ -25,6 +25,12 @@ export default defineContentScript({
 
         const link = resultElement.querySelector("a[href]");
         if (!link) return;
+
+        // Check if the link is within an h3, which is typical for main search results
+        if (!link.closest("h3")) {
+          console.log("Skipping non-search result element:", resultElement);
+          return;
+        }
 
         const url = link.getAttribute("href");
         if (!url) return;
