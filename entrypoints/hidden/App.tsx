@@ -90,7 +90,7 @@ function App() {
               key={pattern}
               className="flex items-center justify-between p-3 transition-colors bg-gray-700 rounded-lg shadow-sm hover:bg-gray-600"
             >
-              <span className="text-base font-mono truncate max-w-[250px] text-gray-100">
+              <span className="font-mono text-base text-gray-100">
                 {pattern}
               </span>
               <button
