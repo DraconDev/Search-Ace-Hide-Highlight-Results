@@ -103,13 +103,13 @@ function App() {
               className="flex items-center justify-between p-3 transition-colors bg-gray-700 rounded-lg shadow-sm hover:bg-gray-600"
             >
               <div className="flex items-center gap-3">
-                <span className="text-base font-mono truncate max-w-[220px] text-gray-100">
-                  {pattern}
-                </span>
                 <span
                   className="inline-block w-8 h-8 border-2 border-gray-500 rounded-full"
                   style={{ backgroundColor: color }}
                 />
+                <span className="text-base font-mono truncate max-w-[220px] text-gray-100">
+                  {pattern}
+                </span>
               </div>
               <button
                 onClick={() => removeHighlightedPattern(pattern)}
