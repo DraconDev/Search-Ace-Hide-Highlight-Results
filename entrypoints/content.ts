@@ -47,7 +47,7 @@ export default defineContentScript({
 
         // Add highlight button
         const highlightBtn = document.createElement("button");
-        highlightBtn.innerHTML = "🌟";
+        highlightBtn.innerHTML = "☆"; // Minimalistic star outline
         highlightBtn.title = "Highlight with default color";
         highlightBtn.style.cursor = "pointer";
         highlightBtn.style.background = "none";
@@ -72,7 +72,7 @@ export default defineContentScript({
 
         // Add hide button
         const hideBtn = document.createElement("button");
-        hideBtn.innerHTML = "👁️";
+        hideBtn.innerHTML = "◎"; // Minimalistic eye/circle outline
         hideBtn.title = "Hide this result";
         hideBtn.style.cursor = "pointer";
         hideBtn.style.background = "none";
