@@ -45,7 +45,7 @@ function App() {
           Search Results Manager
         </h1>
       </div>
-      <div className="flex flex-col gap-3 mb-6">
+      <div className="flex flex-col gap-3 mb-4">
         <a
           href="#"
           onClick={openHiddenPage}
@@ -61,10 +61,10 @@ function App() {
           Highlighted Results
         </a>
       </div>
-      <div className="flex justify-center">
+      <div className="flex flex-col gap-3">
         <button
           onClick={toggleSuspended}
-          className={`px-4 py-2 rounded-md text-sm font-semibold transition-colors duration-200 ${
+          className={`px-4 py-2 rounded-md text-base font-semibold transition-colors duration-200 ${
             state.suspended
               ? "bg-green-600 hover:bg-green-700"
               : "bg-yellow-600 hover:bg-yellow-700"
@@ -72,6 +72,14 @@ function App() {
         >
           {state.suspended ? "Resume" : "Suspend"}
         </button>
+        <a
+          href="https://ko-fi.com/adamdracon"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block w-full px-4 py-2 text-base font-semibold text-center text-white transition-colors duration-200 bg-purple-600 rounded-md hover:bg-purple-700"
+        >
+          Donate
+        </a>
       </div>
     </div>
   );
