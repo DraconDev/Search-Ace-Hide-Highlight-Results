@@ -51,23 +51,6 @@ function App() {
         </h1>
       </div>
 
-      <div className="mb-8">
-        <h2 className="mb-3 text-lg font-semibold text-gray-300">
-          Default Highlight Color
-        </h2>
-        <div className="flex items-center gap-3">
-          <input
-            type="color"
-            value={state.defaultHighlightColor}
-            onChange={(e) => updateDefaultColor(e.target.value)}
-            className="w-10 h-10 overflow-hidden rounded-md cursor-pointer"
-          />
-          <span className="text-gray-300">
-            Current: {state.defaultHighlightColor}
-          </span>
-        </div>
-      </div>
-
       <div>
         <h2 className="mb-3 text-lg font-semibold text-gray-300">
           Add a Pattern to Highlight
@@ -96,7 +79,8 @@ function App() {
           <input
             type="color"
             id="highlightColor"
-            defaultValue={state.defaultHighlightColor}
+            value={state.defaultHighlightColor}
+            onChange={(e) => updateDefaultColor(e.target.value)}
             className="w-10 h-10 overflow-hidden rounded-md cursor-pointer"
           />
           <button
