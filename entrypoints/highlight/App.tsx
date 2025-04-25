@@ -49,6 +49,30 @@ function App() {
         <h1 className="text-2xl font-bold text-white">
           Manage Highlighted Search Results
         </h1>
+      </div>
+
+      <div className="mb-8">
+        <h2 className="mb-3 text-lg font-semibold text-gray-300">
+          Default Highlight Color
+        </h2>
+        <div className="flex items-center gap-3">
+          <input
+            type="color"
+            value={state.defaultHighlightColor}
+            onChange={(e) => updateDefaultColor(e.target.value)}
+            className="w-10 h-10 overflow-hidden rounded-md cursor-pointer"
+          />
+          <span className="text-gray-300">
+            Current: {state.defaultHighlightColor}
+          </span>
+        </div>
+      </div>
+
+      <div>
+        <h2 className="mb-3 text-lg font-semibold text-gray-300">
+          Add a Pattern to Highlight
+        </h2>
+        <div className="flex items-center gap-3 mb-4">
           <input
             type="text"
             id="highlightPattern"
@@ -71,30 +95,6 @@ function App() {
           />
           <input
             type="color"
-            id="highlightColor"
-            defaultValue="#00ff00" // Default green for new patterns
-            className="w-10 h-10 overflow-hidden rounded-md cursor-pointer"
-          />
-          <button
-            onClick={() => {
-              const patternInput = document.getElementById(
-                "highlightPattern"
-              ) as HTMLInputElement;
-              const colorInput = document.getElementById(
-                "highlightColor"
-              ) as HTMLInputElement;
-              if (patternInput.value) {
-                addHighlightedPattern(patternInput.value, colorInput.value);
-                patternInput.value = "";
-              }
-            }}
-            className="px-5 py-3 text-white transition-colors duration-200 bg-blue-600 rounded-md hover:bg-blue-700"
-          >
-            Add
-          </button>
-        </>
-        <h2 className="mb-3 text-lg font-semibold text-gray-300">
-          Currently Highlighted Patterns
         </h2>
         <ul className="space-y-3">
           {Object.entries(state.highlightedResults).map(([pattern, color]) => (
