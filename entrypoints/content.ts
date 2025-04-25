@@ -83,22 +83,22 @@ export default defineContentScript({
         };
         actions.appendChild(hideBtn);
 
-        // Insert buttons after the result title
-        const title = result.querySelector("h3")?.parentElement;
-        if (title) {
-          title.appendChild(actions);
-        }
-
-        // Check if URL matches any highlighted patterns
-        for (const [pattern, color] of Object.entries(highlightedResults)) {
-          if (url.includes(pattern)) {
-            (result as HTMLElement).style.borderLeft = `3px solid ${color}`;
-            (result as HTMLElement).style.paddingLeft = "8px";
-            break;
+        // Insert buttons in a better position
+        const titleContainer = result.querySelector("h3")?.parentElement;
+        if (titleContainer) {
+          // Create a container div for the title and buttons
+          const container = document.createElement('div');
+          container.style.display = 'flex';
+          container.style.justifyContent = 'space-between';
+          container.style.alignItems = 'center';
+          
+          // Move the title into our new container
+          const title = titleContainer.querySelector('h3');
+          if (title) {
+            container.appendChild(title.cloneNode(true));
+            title.remove();
           }
-        }
-      });
-    };
+          
 
     // Run initially
     processResults();
