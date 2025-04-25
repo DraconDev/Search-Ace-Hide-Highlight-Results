@@ -90,6 +90,7 @@ export default defineContentScript({
           (actions as HTMLElement).style.position = 'absolute';
           (actions as HTMLElement).style.right = '0';
           (actions as HTMLElement).style.top = '0';
+          (actions as HTMLElement).style.zIndex = '1000'; // Bring to foreground
           resultContainer.style.position = 'relative';
           resultContainer.appendChild(actions);
         }
