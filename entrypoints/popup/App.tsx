@@ -61,7 +61,7 @@ function App() {
   };
 
   return (
-    <div className="min-w-[320px] p-4 bg-white rounded-lg shadow-xl">
+    <div className="min-w-[320px] p-4 bg-white shadow-xl">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-lg font-bold">Search Result Manager</h1>
         <button
