@@ -80,3 +80,70 @@ function App() {
         </div>
         <ul className="space-y-1">
           {state.hiddenResults.map(pattern => (
+            <li key={pattern} className="flex items-center justify-between">
+              <span>{pattern}</span>
+              <button 
+                onClick={() => removeHiddenPattern(pattern)}
+                className="text-red-500"
+              >
+                ×
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h2 className="mb-2 font-semibold">Highlighted Results</h2>
+        <div className="flex gap-2 mb-2">
+          <input
+            type="text"
+            id="highlightPattern"
+            placeholder="URL pattern to highlight"
+            className="flex-1 p-2 border rounded"
+          />
+          <input
+            type="color"
+            id="highlightColor"
+            defaultValue="#ffff00"
+            className="w-10 h-10"
+          />
+          <button 
+            onClick={() => {
+              const patternInput = document.getElementById('highlightPattern') as HTMLInputElement;
+              const colorInput = document.getElementById('highlightColor') as HTMLInputElement;
+              if (patternInput.value) {
+                addHighlightedPattern(patternInput.value, colorInput.value);
+                patternInput.value = '';
+              }
+            }}
+            className="px-3 py-1 text-white bg-blue-500 rounded"
+          >
+            Add
+          </button>
+        </div>
+        <ul className="space-y-1">
+          {Object.entries(state.highlightedResults).map(([pattern, color]) => (
+            <li key={pattern} className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span>{pattern}</span>
+                <span 
+                  className="inline-block w-4 h-4 border border-gray-300 rounded-full"
+                  style={{ backgroundColor: color }}
+                />
+              </div>
+              <button 
+                onClick={() => removeHighlightedPattern(pattern)}
+                className="text-red-500"
+              >
+                ×
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+export default App;
