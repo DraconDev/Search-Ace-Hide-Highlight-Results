@@ -119,7 +119,7 @@ function App() {
       </div>
 
       <div>
-        <h2 className="mb-2 font-semibold">Highlighted Results</h2>
+        <h2 className="mb-2 text-sm font-semibold tracking-wide text-gray-600 uppercase">Highlighted Results</h2>
         <div className="flex gap-2 mb-2">
           <input
             type="text"
