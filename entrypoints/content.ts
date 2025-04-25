@@ -24,6 +24,11 @@ export default defineContentScript({
 
         console.log("Processing result with URL:", url);
 
+        // Check if buttons already exist for this result
+        if (result.querySelector('.search-result-actions')) {
+          return;
+        }
+
         // Check if URL matches any hidden patterns
         for (const pattern in hiddenResults) {
           if (url.includes(pattern)) {
@@ -34,6 +39,7 @@ export default defineContentScript({
 
         // Add action buttons container
         const actions = document.createElement("div");
+        actions.classList.add('search-result-actions'); // Add a class for identification
         actions.style.display = "flex";
         actions.style.gap = "8px";
         actions.style.marginTop = "4px";
