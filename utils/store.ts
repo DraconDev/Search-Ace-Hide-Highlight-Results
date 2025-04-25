@@ -4,6 +4,7 @@ export const defaultStore: Store = {
     env: "",
     hiddenResults: {},
     highlightedResults: {},
+    defaultHighlightColor: "#00ff00",
     suspended: false
 };
 
