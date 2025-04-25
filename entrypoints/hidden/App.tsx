@@ -37,7 +37,7 @@ function App() {
   };
 
   return (
-    <div className="p-8 mx-auto my-4 text-gray-100 bg-gray-900 min-w-screen">
+    <div className="p-8 mx-auto text-gray-100 bg-gray-900 my- min-w-screen">
       <div className="flex items-center justify-between pb-4 mb-6 border-b border-gray-700">
         <h1 className="text-2xl font-bold text-white">
           Manage Hidden Search Results
