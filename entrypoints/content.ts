@@ -83,17 +83,15 @@ export default defineContentScript({
         };
         actions.appendChild(hideBtn);
 
-        // Position buttons to the right of the result
-        const resultContainer = (result.querySelector('div[role="heading"]') ||
-          result.querySelector("h3")?.parentElement) as HTMLElement;
-        if (resultContainer) {
-          (actions as HTMLElement).style.position = "absolute";
-          (actions as HTMLElement).style.right = "0";
-          (actions as HTMLElement).style.top = "0";
-          (actions as HTMLElement).style.zIndex = "1000"; // Bring to foreground
-          resultContainer.style.position = "relative";
-          resultContainer.appendChild(actions);
-        }
+        // Position buttons to the right of the result using absolute positioning within the main result element
+        const resultElement = result as HTMLElement;
+        resultElement.style.position = 'relative'; // Set main result element to relative positioning
+        (actions as HTMLElement).style.position = "absolute";
+        (actions as HTMLElement).style.right = "0";
+        (actions as HTMLElement).style.top = "0";
+        (actions as HTMLElement).style.zIndex = "1000"; // Bring to foreground
+        resultElement.appendChild(actions); // Append actions to the main result element
+
 
         // Check if URL matches any highlighted patterns
         for (const [pattern, color] of Object.entries(highlightedResults)) {
