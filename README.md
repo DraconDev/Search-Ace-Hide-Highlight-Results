@@ -1,4 +1,4 @@
-![3.png](public/icon/3.png)
+![3.png](public/3.png)
 
 # Search Results Manager
 
