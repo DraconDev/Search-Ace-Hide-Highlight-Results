@@ -8,8 +8,12 @@ export default defineContentScript({
     if (!window.location.href.includes("search?")) return;
 
     const processResults = async () => {
+      console.log('Processing search results...');
       const { hiddenResults, highlightedResults, suspended } = await store.getValue();
-      if (suspended) return;
+      if (suspended) {
+        console.log('Extension is suspended, skipping');
+        return;
+      }
       
       // Get all search result elements - try multiple selectors for different Google layouts
       const results = document.querySelectorAll('div.g, .g, .tF2Cxc, .MjjYud');
@@ -19,7 +23,10 @@ export default defineContentScript({
         if (!link) return;
         
         const url = link.getAttribute('href');
-        if (!url) return;
+        if (!url) {
+          console.log('No URL found for result');
+          return;
+        }
         
         console.log('Processing result with URL:', url);
         
@@ -85,7 +92,10 @@ export default defineContentScript({
         // Insert buttons after the result title
         const title = result.querySelector('h3')?.parentElement;
         if (title) {
+          console.log('Adding action buttons for:', url);
           title.appendChild(actions);
+        } else {
+          console.log('Could not find title element for result');
         }
         
         // Check if URL matches any highlighted patterns
