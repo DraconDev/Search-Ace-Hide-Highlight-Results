@@ -37,7 +37,7 @@ function App() {
   };
 
   return (
-    <div className="min-w-[400px] p-8 bg-gray-900 text-gray-100 rounded-lg  mx-auto my-8">
+    <div className="min-w-[400px] p-8 bg-gray-900 text-gray-100 rounded-lg  mx-auto ">
       <div className="flex items-center justify-between pb-4 mb-6 border-b border-gray-700">
         <h1 className="text-2xl font-bold text-white">
           Manage Highlighted Search Results
