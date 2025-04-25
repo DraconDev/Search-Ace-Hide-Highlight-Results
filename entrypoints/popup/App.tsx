@@ -94,15 +94,18 @@ function App() {
             Add
           </button>
         </div>
-        <ul className="space-y-1">
-          {state.hiddenResults.map(pattern => (
-            <li key={pattern} className="flex items-center justify-between">
-              <span>{pattern}</span>
+        <ul className="space-y-2">
+          {Object.keys(state.hiddenResults).map(pattern => (
+            <li 
+              key={pattern} 
+              className="flex items-center justify-between p-2 transition-colors bg-white rounded-lg shadow-sm hover:bg-gray-50"
+            >
+              <span className="text-sm font-mono truncate max-w-[200px]">{pattern}</span>
               <button 
                 onClick={() => removeHiddenPattern(pattern)}
-                className="text-red-500"
+                className="px-2 py-1 text-red-500 transition-colors rounded-md hover:bg-red-50"
               >
-                ×
+                Remove
               </button>
             </li>
           ))}
