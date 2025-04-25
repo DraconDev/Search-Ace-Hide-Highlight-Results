@@ -4,8 +4,9 @@ export default defineConfig({
   extensionApi: "webextension-polyfill", // Corrected from "webextension" to "webextension-polyfill"
   manifest: {
     name: "Search Ace: Hide & Highlight Results",
-    description: "Tired of sifting through irrelevant search results? Take control with Search Ace! This extension lets you:\n\n*   Hide unwanted results: Eliminate distractions and focus on what matters.\n*   Highlight key results: Make important links stand out for quick access.\n*   Sync settings: Your preferences are saved across all your devices.\n\nSearch Ace helps you declutter your search experience and find the information you need, faster. Download now and become a search master!",
-    version: "0.0.205",
+    description:
+      "Declutter search, hide distractions, highlight what matters. Find what you need, faster. Syncs across devices!",
+    version: "0.0.206",
     permissions: ["storage"],
     icons: {
       "16": "icon/16.png",
