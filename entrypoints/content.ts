@@ -113,8 +113,12 @@ export default defineContentScript({
         // Check if URL matches any highlighted patterns
         for (const [pattern, color] of Object.entries(highlightedResults)) {
           if (url.includes(pattern)) {
-            (result as HTMLElement).style.borderLeft = `3px solid ${color}`;
-            (result as HTMLElement).style.paddingLeft = "8px";
+            const resultElement = result as HTMLElement;
+            // Check if the element is already highlighted
+            if (resultElement.style.borderLeft !== `3px solid ${color}`) {
+              resultElement.style.borderLeft = `3px solid ${color}`;
+              resultElement.style.paddingLeft = "8px";
+            }
             break;
           }
         }
