@@ -64,6 +64,9 @@ export default defineContentScript({
               [url]: defaultHighlightColor,
             },
           });
+          // Immediately apply highlight style
+          (result as HTMLElement).style.borderLeft = `3px solid ${defaultHighlightColor}`;
+          (result as HTMLElement).style.paddingLeft = "8px";
         };
         actions.appendChild(highlightBtn);
 
@@ -86,6 +89,8 @@ export default defineContentScript({
               [url]: true,
             },
           });
+          // Immediately hide the result
+          (result as HTMLElement).style.display = "none";
         };
         actions.appendChild(hideBtn);
 
