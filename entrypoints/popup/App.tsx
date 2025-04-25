@@ -74,14 +74,14 @@ function App() {
         </button>
       </div>
 
-      <div className="mb-6">
-        <h2 className="mb-2 font-semibold text-gray-300">Hidden Results</h2>
-        <div className="flex gap-2 mb-2">
-          <input
-            type="text"
-            id="hiddenPattern"
-            placeholder="URL pattern to hide"
-            className="flex-1 p-2 text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded"
+      <div className="flex flex-col gap-4">
+        <button
+          onClick={() => chrome.runtime.sendMessage({ action: "openHiddenPage" })}
+          className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600"
+        >
+          Manage Hidden Results
+        </button>
+        <button
           />
           <button
             onClick={() => {
