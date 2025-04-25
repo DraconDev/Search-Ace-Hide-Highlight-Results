@@ -41,7 +41,14 @@ function App() {
           {state.suspended ? "Resume" : "Suspend"}
         </button>
       </div>
-      <p>Manage hidden and highlighted results on their respective pages.</p>
+      <div className="flex flex-col gap-2">
+        <a href="../hidden/index.html" className="text-blue-400 hover:underline">
+          Manage Hidden Results
+        </a>
+        <a href="../highlight/index.html" className="text-blue-400 hover:underline">
+          Manage Highlighted Results
+        </a>
+      </div>
     </div>
   );
 }
