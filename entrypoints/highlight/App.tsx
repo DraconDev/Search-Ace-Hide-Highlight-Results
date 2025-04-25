@@ -95,6 +95,30 @@ function App() {
           />
           <input
             type="color"
+            id="highlightColor"
+            defaultValue={state.defaultHighlightColor}
+            className="w-10 h-10 overflow-hidden rounded-md cursor-pointer"
+          />
+          <button
+            onClick={() => {
+              const patternInput = document.getElementById(
+                "highlightPattern"
+              ) as HTMLInputElement;
+              const colorInput = document.getElementById(
+                "highlightColor"
+              ) as HTMLInputElement;
+              if (patternInput.value) {
+                addHighlightedPattern(patternInput.value, colorInput.value);
+                patternInput.value = "";
+              }
+            }}
+            className="px-5 py-3 text-white transition-colors duration-200 bg-blue-600 rounded-md hover:bg-blue-700"
+          >
+            Add
+          </button>
+        </div>
+        <h2 className="mb-3 text-lg font-semibold text-gray-300">
+          Currently Highlighted Patterns
         </h2>
         <ul className="space-y-3">
           {Object.entries(state.highlightedResults).map(([pattern, color]) => (
