@@ -3,9 +3,9 @@ import { defineConfig } from "wxt";
 export default defineConfig({
   extensionApi: "webextension-polyfill", // Corrected from "webextension" to "webextension-polyfill"
   manifest: {
-    name: "Example Extension",
-    description: "Example Extension",
-    version: "0.0.200",
+    name: "Search Ace: Hide & Highlight Results",
+    description: "Take control of your search! Effortlessly hide distracting results and highlight the ones that matter. Declutter your search page and find what you need, faster. Syncs across devices!",
+    version: "0.0.201",
     permissions: ["storage"],
     icons: {
       "16": "icon/16.png",
