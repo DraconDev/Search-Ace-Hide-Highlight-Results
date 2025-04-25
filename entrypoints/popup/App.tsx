@@ -26,7 +26,7 @@ function App() {
   const addHiddenPattern = (pattern: string) => {
     store.setValue({
       ...state,
-      hiddenResults: { ...state.hiddenResults, [pattern]: true }
+      hiddenResults: { ...state.hiddenResults, [pattern]: true },
     });
   };
 
@@ -34,14 +34,14 @@ function App() {
     const { [pattern]: _, ...rest } = state.hiddenResults;
     store.setValue({
       ...state,
-      hiddenResults: rest
+      hiddenResults: rest,
     });
   };
 
   const addHighlightedPattern = (pattern: string, color: string) => {
     store.setValue({
       ...state,
-      highlightedResults: { ...state.highlightedResults, [pattern]: color }
+      highlightedResults: { ...state.highlightedResults, [pattern]: color },
     });
   };
 
@@ -49,14 +49,14 @@ function App() {
     const { [pattern]: _, ...rest } = state.highlightedResults;
     store.setValue({
       ...state,
-      highlightedResults: rest
+      highlightedResults: rest,
     });
   };
 
   const toggleSuspended = () => {
     store.setValue({
       ...state,
-      suspended: !state.suspended
+      suspended: !state.suspended,
     });
   };
 
@@ -66,12 +66,14 @@ function App() {
         <h1 className="text-lg font-bold">Search Result Manager</h1>
         <button
           onClick={toggleSuspended}
-          className={`px-3 py-1 rounded ${state.suspended ? 'bg-green-500' : 'bg-yellow-500'} text-white`}
+          className={`px-3 py-1 rounded ${
+            state.suspended ? "bg-green-500" : "bg-yellow-500"
+          } text-white`}
         >
-          {state.suspended ? 'Resume' : 'Suspend'}
+          {state.suspended ? "Resume" : "Suspend"}
         </button>
       </div>
-      
+
       <div className="mb-6">
         <h2 className="mb-2 font-semibold">Hidden Results</h2>
         <div className="flex gap-2 mb-2">
@@ -81,12 +83,14 @@ function App() {
             placeholder="URL pattern to hide"
             className="flex-1 p-2 border rounded"
           />
-          <button 
+          <button
             onClick={() => {
-              const input = document.getElementById('hiddenPattern') as HTMLInputElement;
+              const input = document.getElementById(
+                "hiddenPattern"
+              ) as HTMLInputElement;
               if (input.value) {
                 addHiddenPattern(input.value);
-                input.value = '';
+                input.value = "";
               }
             }}
             className="px-3 py-1 text-white bg-red-500 rounded"
@@ -95,13 +99,15 @@ function App() {
           </button>
         </div>
         <ul className="space-y-2">
-          {Object.keys(state.hiddenResults).map(pattern => (
-            <li 
-              key={pattern} 
+          {Object.keys(state.hiddenResults).map((pattern) => (
+            <li
+              key={pattern}
               className="flex items-center justify-between p-2 transition-colors bg-white rounded-lg shadow-sm hover:bg-gray-50"
             >
-              <span className="text-sm font-mono truncate max-w-[200px]">{pattern}</span>
-              <button 
+              <span className="text-sm font-mono truncate max-w-[200px]">
+                {pattern}
+              </span>
+              <button
                 onClick={() => removeHiddenPattern(pattern)}
                 className="px-2 py-1 text-red-500 transition-colors rounded-md hover:bg-red-50"
               >
@@ -124,16 +130,20 @@ function App() {
           <input
             type="color"
             id="highlightColor"
-            defaultValue="#ffff00"
+            defaultValue="#00ff00"
             className="w-10 h-10"
           />
-          <button 
+          <button
             onClick={() => {
-              const patternInput = document.getElementById('highlightPattern') as HTMLInputElement;
-              const colorInput = document.getElementById('highlightColor') as HTMLInputElement;
+              const patternInput = document.getElementById(
+                "highlightPattern"
+              ) as HTMLInputElement;
+              const colorInput = document.getElementById(
+                "highlightColor"
+              ) as HTMLInputElement;
               if (patternInput.value) {
                 addHighlightedPattern(patternInput.value, colorInput.value);
-                patternInput.value = '';
+                patternInput.value = "";
               }
             }}
             className="px-3 py-1 text-white bg-blue-500 rounded"
@@ -146,12 +156,12 @@ function App() {
             <li key={pattern} className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span>{pattern}</span>
-                <span 
+                <span
                   className="inline-block w-4 h-4 border border-gray-300 rounded-full"
                   style={{ backgroundColor: color }}
                 />
               </div>
-              <button 
+              <button
                 onClick={() => removeHighlightedPattern(pattern)}
                 className="text-red-500"
               >
