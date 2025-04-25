@@ -26,14 +26,15 @@ function App() {
   const addHiddenPattern = (pattern: string) => {
     store.setValue({
       ...state,
-      hiddenResults: [...state.hiddenResults, pattern]
+      hiddenResults: { ...state.hiddenResults, [pattern]: true }
     });
   };
 
   const removeHiddenPattern = (pattern: string) => {
+    const { [pattern]: _, ...rest } = state.hiddenResults;
     store.setValue({
       ...state,
-      hiddenResults: state.hiddenResults.filter(p => p !== pattern)
+      hiddenResults: rest
     });
   };
 
