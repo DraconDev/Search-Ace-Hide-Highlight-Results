@@ -41,7 +41,8 @@ export default defineContentScript({
         const actions = document.createElement("div");
         actions.classList.add("search-result-actions"); // Add a class for identification
         actions.style.display = "flex";
-        actions.style.gap = "8px";
+        actions.style.flexDirection = "column"; // Arrange items in a column
+        actions.style.gap = "4px"; // Adjust gap for vertical spacing
         actions.style.marginTop = "4px";
 
         // Add highlight button
