@@ -4,27 +4,22 @@ import { store } from "@/utils/store";
 
 function App() {
   const [state, setState] = useState<Store | null>(null);
-  const [defaultHighlightColor, setDefaultHighlightColor] = useState("#00ff00"); // Default green
 
   useEffect(() => {
     if (!state) {
       (async () => {
         const currentState = await store.getValue();
         setState(currentState);
-        if (currentState?.defaultHighlightColor) {
-          setDefaultHighlightColor(currentState.defaultHighlightColor);
-        }
       })();
     }
     store.watch((newValue) => {
       if (newValue) {
         setState(newValue);
-        if (newValue.defaultHighlightColor) {
-          setDefaultHighlightColor(newValue.defaultHighlightColor);
-        }
       }
     });
   }, []);
+
+  if (!state) return <div>Loading...</div>;
 
   const addHighlightedPattern = (pattern: string, color: string) => {
     store.setValue({
@@ -40,19 +35,6 @@ function App() {
       highlightedResults: rest,
     });
   };
-
-  const handleColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newColor = event.target.value;
-    setDefaultHighlightColor(newColor);
-    if (state) {
-      store.setValue({
-        ...state,
-        defaultHighlightColor: newColor,
-      });
-    }
-  };
-
-  if (!state) return <div>Loading...</div>;
 
   return (
     <div className="min-w-[400px] p-8 bg-gray-900 text-gray-100 rounded-lg  mx-auto ">
@@ -90,8 +72,7 @@ function App() {
           <input
             type="color"
             id="highlightColor"
-            value={defaultHighlightColor} // Use state value
-            onChange={handleColorChange} // Add change handler
+            defaultValue="#00ff00"
             className="w-10 h-10 overflow-hidden rounded-md cursor-pointer"
           />
           <button
