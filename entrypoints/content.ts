@@ -37,8 +37,21 @@ export default defineContentScript({
       });
     };
 
-    // Run initially and whenever the store changes
+    // Run initially
     processResults();
-    store.onChange(processResults);
+    
+    // Watch for store changes
+    browser.storage.onChanged.addListener((changes, areaName) => {
+      if (areaName === 'sync' && changes['sync:store']) {
+        processResults();
+      }
+    });
+
+    // Watch for dynamic result loading
+    const observer = new MutationObserver(processResults);
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
   },
 });
