@@ -39,7 +39,7 @@ function App() {
   };
 
   return (
-    <div className="p-6 text-gray-100 bg-gray-900 rounded-lg shadow-xl min-w-[400px]">
+    <div className="p-6 text-gray-100 bg-zinc-800 rounded-lg shadow-md min-w-[400px] font-sans">
       <div className="flex items-center justify-between pb-4 mb-6 border-b border-gray-700">
         <h1 className="mx-auto text-xl font-bold text-white">
           Search Results Manager
@@ -49,14 +49,14 @@ function App() {
         <a
           href="#"
           onClick={openHiddenPage}
-          className="block w-full px-4 py-2 text-base font-semibold text-center text-white transition-colors duration-200 bg-red-600 rounded-md hover:bg-red-700"
+          className="block w-full px-4 py-2 text-base font-semibold text-center text-white transition-colors duration-200 bg-red-500 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75"
         >
           Hidden Results
         </a>
         <a
           href="#"
           onClick={openHighlightPage}
-          className="block w-full px-4 py-2 text-base font-semibold text-center text-white transition-colors duration-200 bg-blue-600 rounded-md hover:bg-blue-700"
+          className="block w-full px-4 py-2 text-base font-semibold text-center text-white transition-colors duration-200 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
         >
           Highlighted Results
         </a>
@@ -64,10 +64,10 @@ function App() {
       <div className="flex flex-col gap-4">
         <button
           onClick={toggleSuspended}
-          className={`px-4 py-2 rounded-md text-base font-semibold transition-colors duration-200 ${
+          className={`px-4 py-2 rounded-md text-base font-semibold transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-opacity-75 ${
             state.suspended
-              ? "bg-green-600 hover:bg-green-700"
-              : "bg-amber-600 hover:bg-amber-700"
+              ? "bg-green-500 hover:bg-green-600"
+              : "bg-amber-500 hover:bg-amber-600"
           } text-white w-full`}
         >
           {state.suspended ? "Resume" : "Suspend"}
@@ -76,7 +76,7 @@ function App() {
           href="https://ko-fi.com/adamdracon"
           target="_blank"
           rel="noopener noreferrer"
-          className="block w-full px-4 py-2 text-base font-semibold text-center text-white transition-colors duration-200 bg-purple-600 rounded-md hover:bg-purple-700"
+          className="block w-full px-4 py-2 text-base font-semibold text-center text-white transition-colors duration-200 bg-purple-500 rounded-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-75"
         >
           Donate
         </a>
