@@ -168,13 +168,13 @@ export default defineContentScript({
         actions.appendChild(hideBtn);
 
         // Position buttons to the right of the result using absolute positioning within the main result element
-        const resultElement = result as HTMLElement;
-        resultElement.style.position = "relative"; // Set main result element to relative positioning
+        // Use existing resultElement reference
+        resultElement.style.position = "relative";
         (actions as HTMLElement).style.position = "absolute";
-        (actions as HTMLElement).style.right = "-26px"; // Move slightly outside to the right
+        (actions as HTMLElement).style.right = "-26px";
         (actions as HTMLElement).style.top = "0";
-        (actions as HTMLElement).style.zIndex = "1000"; // Bring to foreground
-        resultElement.appendChild(actions); // Append actions to the main result element
+        (actions as HTMLElement).style.zIndex = "1000";
+        resultElement.appendChild(actions);
 
         // Check if domain matches any highlighted patterns
         for (const [pattern, color] of Object.entries(highlightedResults)) {
