@@ -50,6 +50,7 @@ function App() {
           href="#"
           onClick={openHiddenPage}
           className="block w-full px-4 py-2 text-base font-semibold text-center text-white transition-colors duration-200 bg-red-500 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75"
+          aria-label="Open Hidden Results page"
         >
           Hidden Results
         </a>
@@ -57,6 +58,7 @@ function App() {
           href="#"
           onClick={openHighlightPage}
           className="block w-full px-4 py-2 text-base font-semibold text-center text-white transition-colors duration-200 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+          aria-label="Open Highlighted Results page"
         >
           Highlighted Results
         </a>
@@ -69,6 +71,7 @@ function App() {
               ? "bg-green-500 hover:bg-green-600"
               : "bg-amber-500 hover:bg-amber-600"
           } text-white w-full`}
+          aria-label={state.suspended ? "Resume extension" : "Suspend extension"}
         >
           {state.suspended ? "Resume" : "Suspend"}
         </button>
@@ -77,6 +80,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
           className="block w-full px-4 py-2 text-base font-semibold text-center text-white transition-colors duration-200 bg-purple-500 rounded-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-75"
+          aria-label="Donate to support the developer"
         >
           Donate
         </a>
