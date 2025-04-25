@@ -51,14 +51,14 @@ function App() {
           onClick={openHiddenPage}
           className="block w-full px-4 py-2 text-base font-semibold text-center text-white transition-colors duration-200 bg-red-600 rounded-md hover:bg-red-700"
         >
-          Manage Hidden Results
+          Hidden Results
         </a>
         <a
           href="#"
           onClick={openHighlightPage}
-          className="block w-full px-4 py-2 text-base font-semibold text-center text-white transition-colors duration-200 bg-blue-600 rounded-md hover:bg-blue-700"
+          className="block w-full px-4 py-2 text-base font-semibold text-center text-white transition-colors duration-200 bg-green-600 rounded-md hover:bg-green-700"
         >
-          Manage Highlighted Results
+          Highlighted Results
         </a>
       </div>
       <div className="flex justify-center">
