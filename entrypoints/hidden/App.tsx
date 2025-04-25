@@ -37,13 +37,17 @@ function App() {
   };
 
   return (
-    <div className="min-w-[400px] p-8 bg-gray-900 text-gray-100 rounded-lg shadow-xl mx-auto my-8">
+    <div className="p-8 mx-auto my-8 text-gray-100 bg-gray-900 shadow-xl min-w-screen">
       <div className="flex items-center justify-between pb-4 mb-6 border-b border-gray-700">
-        <h1 className="text-2xl font-bold text-white">Manage Hidden Search Results</h1>
+        <h1 className="text-2xl font-bold text-white">
+          Manage Hidden Search Results
+        </h1>
       </div>
 
       <div className="mb-6">
-        <h2 className="mb-3 text-lg font-semibold text-gray-300">Add a Pattern to Hide</h2>
+        <h2 className="mb-3 text-lg font-semibold text-gray-300">
+          Add a Pattern to Hide
+        </h2>
         <div className="flex gap-3 mb-4">
           <input
             type="text"
@@ -51,7 +55,7 @@ function App() {
             placeholder="Enter URL pattern to hide"
             className="flex-1 p-3 text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
             onKeyPress={(event) => {
-              if (event.key === 'Enter') {
+              if (event.key === "Enter") {
                 const input = document.getElementById(
                   "hiddenPattern"
                 ) as HTMLInputElement;
@@ -77,7 +81,9 @@ function App() {
             Add
           </button>
         </div>
-        <h2 className="mb-3 text-lg font-semibold text-gray-300">Currently Hidden Patterns</h2>
+        <h2 className="mb-3 text-lg font-semibold text-gray-300">
+          Currently Hidden Patterns
+        </h2>
         <ul className="space-y-3">
           {Object.keys(state.hiddenResults).map((pattern) => (
             <li
