@@ -16,23 +16,44 @@ export default defineContentScript({
       const results = document.querySelectorAll("div.g, .g, .tF2Cxc, .MjjYud");
 
       results.forEach((result) => {
-        const link = result.querySelector("a[href]");
+        const resultElement = result as HTMLElement;
+
+        // Check if this result has already been processed
+        if (resultElement.classList.contains("processed-result")) {
+          return;
+        }
+
+        const link = resultElement.querySelector("a[href]");
         if (!link) return;
 
         const url = link.getAttribute("href");
         if (!url) return;
 
-        console.log("Processing result with URL:", url);
+        // Extract the domain from the URL
+        let domain = "";
+        try {
+          const urlObject = new URL(url);
+          domain = urlObject.hostname;
+        } catch (e) {
+          console.error("Invalid URL:", url, e);
+          return; // Skip invalid URLs
+        }
+
+        console.log("Processing result with URL:", url, "Domain:", domain);
 
         // Check if buttons already exist for this result
-        if (result.querySelector(".search-result-actions")) {
+        if (resultElement.querySelector(".search-result-actions")) {
+          // Mark as processed even if buttons existed from a previous run
+          resultElement.classList.add("processed-result");
           return;
         }
 
-        // Check if URL matches any hidden patterns
+        // Check if domain matches any hidden patterns
         for (const pattern in hiddenResults) {
-          if (url.includes(pattern)) {
-            (result as HTMLElement).style.display = "none";
+          if (domain.includes(pattern)) {
+            resultElement.style.display = "none";
+            // Mark as processed even if hidden
+            resultElement.classList.add("processed-result");
             return;
           }
         }
@@ -63,10 +84,20 @@ export default defineContentScript({
             "div.g, .g, .tF2Cxc, .MjjYud"
           ) as HTMLElement;
 
-          if (highlightedResults && highlightedResults[url]) {
+          // Extract the domain from the URL
+          let domain = "";
+          try {
+            const urlObject = new URL(url);
+            domain = urlObject.hostname;
+          } catch (e) {
+            console.error("Invalid URL:", url, e);
+            return; // Skip invalid URLs
+          }
+
+          if (highlightedResults && highlightedResults[domain]) {
             // If already highlighted, remove highlight
             const newHighlightedResults = { ...highlightedResults };
-            delete newHighlightedResults[url];
+            delete newHighlightedResults[domain];
             await store.setValue({
               ...current,
               highlightedResults: newHighlightedResults,
@@ -81,7 +112,7 @@ export default defineContentScript({
               ...current,
               highlightedResults: {
                 ...current.highlightedResults,
-                [url]: defaultHighlightColor,
+                [domain]: defaultHighlightColor,
               },
             });
             if (resultElement) {
@@ -106,11 +137,22 @@ export default defineContentScript({
           e.preventDefault();
           e.stopPropagation();
           const current = await store.getValue();
+
+          // Extract the domain from the URL
+          let domain = "";
+          try {
+            const urlObject = new URL(url);
+            domain = urlObject.hostname;
+          } catch (e) {
+            console.error("Invalid URL:", url, e);
+            return; // Skip invalid URLs
+          }
+
           await store.setValue({
             ...current,
             hiddenResults: {
               ...current.hiddenResults,
-              [url]: true,
+              [domain]: true,
             },
           });
           // Hide the element immediately
@@ -133,7 +175,6 @@ export default defineContentScript({
         (actions as HTMLElement).style.zIndex = "1000"; // Bring to foreground
         resultElement.appendChild(actions); // Append actions to the main result element
 
-        // Check if URL matches any highlighted patterns
         // Check if domain matches any highlighted patterns
         for (const [pattern, color] of Object.entries(highlightedResults)) {
           if (domain.includes(pattern)) {
