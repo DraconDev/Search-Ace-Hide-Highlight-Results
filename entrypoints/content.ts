@@ -99,6 +99,23 @@ export default defineContentScript({
             title.remove();
           }
           
+          // Add buttons to container
+          container.appendChild(actions);
+          
+          // Add container to title's original position
+          titleContainer.appendChild(container);
+        }
+
+        // Check if URL matches any highlighted patterns
+        for (const [pattern, color] of Object.entries(highlightedResults)) {
+          if (url.includes(pattern)) {
+            (result as HTMLElement).style.borderLeft = `3px solid ${color}`;
+            (result as HTMLElement).style.paddingLeft = "8px";
+            break;
+          }
+        }
+      });
+    };
 
     // Run initially
     processResults();
