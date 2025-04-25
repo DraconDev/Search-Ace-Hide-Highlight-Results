@@ -31,25 +31,25 @@ export default defineContentScript({
           }
         }
         
-        // Check if URL matches any highlighted patterns
-        for (const [pattern, color] of Object.entries(highlightedResults)) {
-          if (url.includes(pattern)) {
-            (result as HTMLElement).style.borderLeft = `3px solid ${color}`;
-            (result as HTMLElement).style.paddingLeft = '8px';
-            break;
-          }
-        }
-      });
-    };
-
-    // Run initially
-    processResults();
-    
-    // Watch for store changes
-    browser.storage.onChanged.addListener((changes, areaName) => {
-      if (areaName === 'sync' && changes['sync:store']) {
-        processResults();
-      }
+        // Add action buttons container
+        const actions = document.createElement('div');
+        actions.style.display = 'flex';
+        actions.style.gap = '8px';
+        actions.style.marginTop = '4px';
+        
+        // Add highlight button
+        const highlightBtn = document.createElement('button');
+        highlightBtn.innerHTML = '🌟';
+        highlightBtn.title = 'Highlight with default color';
+        highlightBtn.style.cursor = 'pointer';
+        highlightBtn.style.background = 'none';
+        highlightBtn.style.border = 'none';
+        highlightBtn.style.padding = '0';
+        highlightBtn.onclick = async (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const { defaultHighlightColor } = await store.getValue();
+          const current = await store.getValue();
     });
 
     // Watch for dynamic result loading
