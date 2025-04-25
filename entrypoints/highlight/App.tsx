@@ -72,7 +72,7 @@ function App() {
           <input
             type="color"
             id="highlightColor"
-            defaultValue="#00ff00"
+            defaultValue="#00ff00" // Default green for new patterns
             className="w-10 h-10 overflow-hidden rounded-md cursor-pointer"
           />
           <button
