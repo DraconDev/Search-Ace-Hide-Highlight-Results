@@ -84,14 +84,14 @@ export default defineContentScript({
         actions.appendChild(hideBtn);
 
         // Position buttons to the right of the result
-        const resultContainer = (result.querySelector('div[role="heading"]') || 
-                              result.querySelector('h3')?.parentElement) as HTMLElement;
+        const resultContainer = (result.querySelector('div[role="heading"]') ||
+          result.querySelector("h3")?.parentElement) as HTMLElement;
         if (resultContainer) {
-          (actions as HTMLElement).style.position = 'absolute';
-          (actions as HTMLElement).style.right = '0';
-          (actions as HTMLElement).style.top = '0';
-          (actions as HTMLElement).style.zIndex = '1000'; // Bring to foreground
-          resultContainer.style.position = 'relative';
+          (actions as HTMLElement).style.position = "absolute";
+          (actions as HTMLElement).style.right = "0";
+          (actions as HTMLElement).style.top = "0";
+          (actions as HTMLElement).style.zIndex = "1000"; // Bring to foreground
+          resultContainer.style.position = "relative";
           resultContainer.appendChild(actions);
         }
 
