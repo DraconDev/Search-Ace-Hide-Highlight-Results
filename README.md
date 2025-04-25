@@ -1,45 +1,24 @@
-# SubHub - Subscription Tracker
+# Search Results Manager
 
-A Chrome extension for tracking and managing subscriptions, built with modern web technologies.
+This extension helps you manage your search results by allowing you to hide and highlight specific results.
 
-## Tech Stack
+## Features
 
-- **Runtime:** Bun
-- **Extension Framework:** WXT
-- **Frontend:** React
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **Data Storage:** chrome.storage.sync
+*   Hide unwanted search results
+*   Highlight important search results
+*   Suspend/Resume the extension
+*   Settings are synced across all your devices
 
-## Development
+## Usage
 
-1. Install dependencies:
-```bash
-bun install
-```
+1.  Install the extension from the Chrome Web Store or Firefox Add-ons.
+2.  Open the popup by clicking on the extension icon in the toolbar.
+3.  Use the buttons to manage your search results.
 
-2. Start development server:
-```bash
-bun dev
-```
+## Contributing
 
-3. Build for production:
-```bash
-bun build
-```
+If you would like to contribute to this project, please fork the repository and submit a pull request.
 
-## Project Structure
+## License
 
-- `entrypoints/` - Extension entry points (popup, background, content scripts)
-- `components/` - Reusable React components
-- `assets/` - Static assets
-- `public/` - Public files
-
-## Guidelines
-
-- Use TypeScript for type safety
-- Follow React best practices
-- Style with Tailwind CSS utility classes only
-- Handle errors with try-catch blocks
-- Follow accessibility guidelines (WCAG)
-- Write unit tests for components and utilities
+[MIT](https://opensource.org/licenses/MIT)
