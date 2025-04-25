@@ -24,95 +24,106 @@ export default defineContentScript({
 
         console.log("Processing result with URL:", url);
 
-        // Check if buttons already exist for this result
-        if (result.querySelector(".search-result-actions")) {
+        const resultElement = result as HTMLElement;
+
+        // Reset styles before applying based on current state
+        resultElement.style.display = "";
+        resultElement.style.borderLeft = "";
+        resultElement.style.paddingLeft = "";
+        resultElement.style.borderRight = ""; // Also reset right border
+        resultElement.style.paddingRight = ""; // Also reset right padding
+
+
+        // Check if URL matches any hidden patterns
+        let isHidden = false;
+        for (const pattern in hiddenResults) {
+          if (url.includes(pattern)) {
+            resultElement.style.display = "none";
+            isHidden = true;
+            break;
+          }
+        }
+
+        // If hidden, no need to add buttons or check for highlighting
+        if (isHidden) {
           return;
         }
 
-        // Check if URL matches any hidden patterns
-        for (const pattern in hiddenResults) {
+        // Check if URL matches any highlighted patterns
+        let isHighlighted = false;
+        for (const [pattern, color] of Object.entries(highlightedResults)) {
           if (url.includes(pattern)) {
-            (result as HTMLElement).style.display = "none";
-            return;
+            resultElement.style.borderLeft = `3px solid ${color}`; // Apply border to the left
+            resultElement.style.paddingLeft = "8px"; // Apply padding to the left
+            isHighlighted = true;
+            break;
           }
         }
 
-        // Add action buttons container
-        const actions = document.createElement("div");
-        actions.classList.add("search-result-actions"); // Add a class for identification
-        actions.style.display = "flex";
-        actions.style.flexDirection = "column"; // Arrange items in a column
-        actions.style.gap = "4px"; // Adjust gap for vertical spacing
-        actions.style.marginTop = "4px";
+        // Add action buttons container if it doesn't exist
+        let actions = resultElement.querySelector('.search-result-actions') as HTMLElement;
+        if (!actions) {
+          actions = document.createElement("div");
+          actions.classList.add('search-result-actions'); // Add a class for identification
+          actions.style.display = "flex";
+          actions.style.flexDirection = "column"; // Arrange items in a column
+          actions.style.gap = "4px"; // Adjust gap for vertical spacing
+          actions.style.marginTop = "4px";
+          actions.style.position = "absolute";
+          actions.style.right = "-20px"; // Move slightly outside to the right
+          actions.style.top = "0";
+          actions.style.zIndex = "1000"; // Bring to foreground
 
-        // Add highlight button
-        const highlightBtn = document.createElement("button");
-        highlightBtn.innerHTML = "🌟";
-        highlightBtn.title = "Highlight with default color";
-        highlightBtn.style.cursor = "pointer";
-        highlightBtn.style.background = "none";
-        highlightBtn.style.border = "none";
-        highlightBtn.style.padding = "0";
-        highlightBtn.onclick = async (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          const { defaultHighlightColor } = await store.getValue();
-          const current = await store.getValue();
-          await store.setValue({
-            ...current,
-            highlightedResults: {
-              ...current.highlightedResults,
-              [url]: defaultHighlightColor,
-            },
-          });
-          // Immediately apply highlight style
-          (
-            result as HTMLElement
-          ).style.borderLeft = `3px solid ${defaultHighlightColor}`;
-          (result as HTMLElement).style.paddingLeft = "8px";
-        };
-        actions.appendChild(highlightBtn);
+          // Add highlight button
+          const highlightBtn = document.createElement("button");
+          highlightBtn.innerHTML = "🌟";
+          highlightBtn.title = "Highlight with default color";
+          highlightBtn.style.cursor = "pointer";
+          highlightBtn.style.background = "none";
+          highlightBtn.style.border = "none";
+          highlightBtn.style.padding = "0";
+          highlightBtn.onclick = async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const { defaultHighlightColor } = await store.getValue();
+            const current = await store.getValue();
+            await store.setValue({
+              ...current,
+              highlightedResults: {
+                ...current.highlightedResults,
+                [url]: defaultHighlightColor,
+              },
+            });
+            // Store change listener will re-process and apply styles
+          };
+          actions.appendChild(highlightBtn);
 
-        // Add hide button
-        const hideBtn = document.createElement("button");
-        hideBtn.innerHTML = "👁️";
-        hideBtn.title = "Hide this result";
-        hideBtn.style.cursor = "pointer";
-        hideBtn.style.background = "none";
-        hideBtn.style.border = "none";
-        hideBtn.style.padding = "0";
-        hideBtn.onclick = async (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          const current = await store.getValue();
-          await store.setValue({
-            ...current,
-            hiddenResults: {
-              ...current.hiddenResults,
-              [url]: true,
-            },
-          });
-          // Immediately hide the result
-          (result as HTMLElement).style.display = "none";
-        };
-        actions.appendChild(hideBtn);
+          // Add hide button
+          const hideBtn = document.createElement("button");
+          hideBtn.innerHTML = "👁️";
+          hideBtn.title = "Hide this result";
+          hideBtn.style.cursor = "pointer";
+          hideBtn.style.background = "none";
+          hideBtn.style.border = "none";
+          hideBtn.style.padding = "0";
+          hideBtn.onclick = async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const current = await store.getValue();
+            await store.setValue({
+              ...current,
+              hiddenResults: {
+                ...current.hiddenResults,
+                [url]: true,
+              },
+            });
+            // Store change listener will re-process and apply styles
+          };
+          actions.appendChild(hideBtn);
 
-        // Position buttons to the right of the result using absolute positioning within the main result element
-        const resultElement = result as HTMLElement;
-        resultElement.style.position = "relative"; // Set main result element to relative positioning
-        (actions as HTMLElement).style.position = "absolute";
-        (actions as HTMLElement).style.right = "-20px"; // Move slightly outside to the right
-        (actions as HTMLElement).style.top = "0";
-        (actions as HTMLElement).style.zIndex = "1000"; // Bring to foreground
-        resultElement.appendChild(actions); // Append actions to the main result element
-
-        // Check if URL matches any highlighted patterns
-        for (const [pattern, color] of Object.entries(highlightedResults)) {
-          if (url.includes(pattern)) {
-            (result as HTMLElement).style.borderLeft = `3px solid ${color}`;
-            (result as HTMLElement).style.paddingLeft = "8px";
-            break;
-          }
+          // Append actions to the main result element
+          resultElement.style.position = 'relative'; // Set main result element to relative positioning
+          resultElement.appendChild(actions);
         }
       });
     };
