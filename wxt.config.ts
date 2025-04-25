@@ -6,7 +6,7 @@ export default defineConfig({
     name: "Search Ace: Hide & Highlight Results",
     description:
       "Declutter search, hide distractions, highlight what matters. Find what you need, faster. Syncs across devices!",
-    version: "0.0.210",
+    version: "0.0.211",
     permissions: ["storage"],
     icons: {
       "16": "icon/16.png",

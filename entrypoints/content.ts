@@ -184,6 +184,9 @@ export default defineContentScript({
         for (const [pattern, color] of Object.entries(highlightedResults)) {
           if (domain.includes(pattern)) {
             const resultElement = result as HTMLElement;
+            // Remove existing highlight before applying a new one to prevent double borders
+            resultElement.style.borderLeft = "";
+            resultElement.style.paddingLeft = "";
             resultElement.style.borderLeft = `3px solid ${color}`;
             resultElement.style.paddingLeft = "8px";
             break;
