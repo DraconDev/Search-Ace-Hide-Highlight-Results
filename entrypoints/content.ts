@@ -26,12 +26,10 @@ export default defineContentScript({
         const link = resultElement.querySelector("a[href]");
         if (!link) return;
 
-        // Check if the element contains a link and a potential snippet element,
-        // which is typical for genuine search results.
-        const snippet = resultElement.querySelector("span.aCOpNe");
-        if (!link || !snippet) {
-           console.log("Skipping non-search result element (missing link or snippet):", resultElement);
-           return;
+        // Check if the link is within an h3, which is typical for main search results
+        if (!link.closest("h3")) {
+          console.log("Skipping non-search result element:", resultElement);
+          return;
         }
 
         const url = link.getAttribute("href");
