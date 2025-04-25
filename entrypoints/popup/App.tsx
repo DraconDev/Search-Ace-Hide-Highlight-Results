@@ -28,6 +28,16 @@ function App() {
     });
   };
 
+  const openHiddenPage = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    browser.tabs.create({ url: browser.runtime.getURL("hidden.html") });
+  };
+
+  const openHighlightPage = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    browser.tabs.create({ url: browser.runtime.getURL("highlight.html") });
+  };
+
   return (
     <div className="min-w-[320px] p-6 bg-gray-800 text-gray-200 rounded-xl shadow-lg">
       <div className="flex items-center justify-between pb-4 mb-6 border-b border-gray-700">
@@ -42,10 +52,10 @@ function App() {
         </button>
       </div>
       <div className="flex flex-col gap-2">
-        <a href="hidden.html" className="text-blue-400 hover:underline">
+        <a href="#" onClick={openHiddenPage} className="text-blue-400 hover:underline">
           Manage Hidden Results
         </a>
-        <a href="highlight.html" className="text-blue-400 hover:underline">
+        <a href="#" onClick={openHighlightPage} className="text-blue-400 hover:underline">
           Manage Highlighted Results
         </a>
       </div>
