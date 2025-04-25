@@ -39,11 +39,11 @@ function App() {
   return (
     <div className="min-w-[400px] p-8 bg-gray-900 text-gray-100 rounded-lg shadow-xl mx-auto my-8">
       <div className="flex items-center justify-between pb-4 mb-6 border-b border-gray-700">
-        <h1 className="text-2xl font-bold text-white">Highlighted Result Manager</h1>
+        <h1 className="text-2xl font-bold text-white">Manage Highlighted Search Results</h1>
       </div>
 
       <div>
-        <h2 className="mb-3 text-lg font-semibold text-gray-300">Add Highlight Pattern</h2>
+        <h2 className="mb-3 text-lg font-semibold text-gray-300">Add a Pattern to Highlight</h2>
         <div className="flex items-center gap-3 mb-4">
           <input
             type="text"
@@ -89,7 +89,7 @@ function App() {
             Add
           </button>
         </div>
-        <h2 className="mb-3 text-lg font-semibold text-gray-300">Highlighted Patterns</h2>
+        <h2 className="mb-3 text-lg font-semibold text-gray-300">Currently Highlighted Patterns</h2>
         <ul className="space-y-3">
           {Object.entries(state.highlightedResults).map(([pattern, color]) => (
             <li
