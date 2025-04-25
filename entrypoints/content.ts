@@ -66,6 +66,12 @@ export default defineContentScript({
               [url]: defaultHighlightColor,
             },
           });
+          // Apply highlight style immediately
+          const resultElement = highlightBtn.closest("div.g, .g, .tF2Cxc, .MjjYud") as HTMLElement;
+          if (resultElement) {
+            resultElement.style.borderLeft = `3px solid ${defaultHighlightColor}`;
+            resultElement.style.paddingLeft = "8px";
+          }
           // Store change listener will re-process and apply styles
         };
         actions.appendChild(highlightBtn);
@@ -90,6 +96,11 @@ export default defineContentScript({
               [url]: true,
             },
           });
+          // Hide the element immediately
+          const resultElement = hideBtn.closest("div.g, .g, .tF2Cxc, .MjjYud") as HTMLElement;
+          if (resultElement) {
+            resultElement.style.display = "none";
+          }
           // Store change listener will re-process and apply styles
         };
         actions.appendChild(hideBtn);
