@@ -57,22 +57,37 @@ export default defineContentScript({
         highlightBtn.onclick = async (e) => {
           e.preventDefault();
           e.stopPropagation();
-          const { defaultHighlightColor } = await store.getValue();
+          const { defaultHighlightColor, highlightedResults } = await store.getValue();
           const current = await store.getValue();
-          await store.setValue({
-            ...current,
-            highlightedResults: {
-              ...current.highlightedResults,
-              [url]: defaultHighlightColor,
-            },
-          });
-          // Apply highlight style immediately
           const resultElement = highlightBtn.closest(
             "div.g, .g, .tF2Cxc, .MjjYud"
           ) as HTMLElement;
-          if (resultElement) {
-            resultElement.style.borderLeft = `3px solid ${defaultHighlightColor}`;
-            resultElement.style.paddingLeft = "8px";
+
+          if (highlightedResults && highlightedResults[url]) {
+            // If already highlighted, remove highlight
+            const newHighlightedResults = { ...highlightedResults };
+            delete newHighlightedResults[url];
+            await store.setValue({
+              ...current,
+              highlightedResults: newHighlightedResults,
+            });
+            if (resultElement) {
+              resultElement.style.borderLeft = "";
+              resultElement.style.paddingLeft = "";
+            }
+          } else {
+            // If not highlighted, add highlight
+            await store.setValue({
+              ...current,
+              highlightedResults: {
+                ...current.highlightedResults,
+                [url]: defaultHighlightColor,
+              },
+            });
+            if (resultElement) {
+              resultElement.style.borderLeft = `3px solid ${defaultHighlightColor}`;
+              resultElement.style.paddingLeft = "8px";
+            }
           }
           // Store change listener will re-process and apply styles
         };
