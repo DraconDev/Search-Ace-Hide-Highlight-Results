@@ -1,6 +1,4 @@
-:start_line:1
--------
-![3.png](3.png)
+![32.png](public/icon/32.png)
 
 # Search Results Manager
 
