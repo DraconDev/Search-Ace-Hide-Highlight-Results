@@ -3,7 +3,7 @@ import { Store } from "@/types/types";
 export const defaultStore: Store = {
     env: "",
     hiddenResults: [],
-    highlightedResults: [],
+    highlightedResults: {},
 };
 
 export const store = storage.defineItem<Store>("sync:store", {
