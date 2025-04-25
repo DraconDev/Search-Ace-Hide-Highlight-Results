@@ -53,6 +53,7 @@ export default defineContentScript({
         highlightBtn.style.background = "none";
         highlightBtn.style.border = "none";
         highlightBtn.style.padding = "0";
+        highlightBtn.style.fontSize = "18px"; // Make icon a little bigger
         highlightBtn.onclick = async (e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -65,11 +66,7 @@ export default defineContentScript({
               [url]: defaultHighlightColor,
             },
           });
-          // Immediately apply highlight style
-          (
-            result as HTMLElement
-          ).style.borderLeft = `3px solid ${defaultHighlightColor}`;
-          (result as HTMLElement).style.paddingLeft = "8px";
+          // Store change listener will re-process and apply styles
         };
         actions.appendChild(highlightBtn);
 
@@ -81,6 +78,7 @@ export default defineContentScript({
         hideBtn.style.background = "none";
         hideBtn.style.border = "none";
         hideBtn.style.padding = "0";
+        hideBtn.style.fontSize = "18px"; // Make icon a little bigger
         hideBtn.onclick = async (e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -92,8 +90,7 @@ export default defineContentScript({
               [url]: true,
             },
           });
-          // Immediately hide the result
-          (result as HTMLElement).style.display = "none";
+          // Store change listener will re-process and apply styles
         };
         actions.appendChild(hideBtn);
 
