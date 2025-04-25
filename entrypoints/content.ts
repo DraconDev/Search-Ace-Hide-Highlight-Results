@@ -27,10 +27,10 @@ export default defineContentScript({
         if (!link) return;
 
         // Check if the link is within an h3, which is typical for main search results
-        if (!link.closest("h3")) {
-          console.log("Skipping non-search result element:", resultElement);
-          return;
-        }
+        // if (!link.closest("h3")) {
+        //   console.log("Skipping non-search result element:", resultElement);
+        //   return;
+        // }
 
         const url = link.getAttribute("href");
         if (!url) return;
