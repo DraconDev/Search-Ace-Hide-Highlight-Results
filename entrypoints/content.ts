@@ -127,8 +127,12 @@ export default defineContentScript({
 
         // Add hide button
         const hideBtn = document.createElement("button");
-        hideBtn.innerHTML = "✕"; // Minimalistic close/hide symbol
-        hideBtn.title = "Hide this result";
+        hideBtn.innerHTML = `
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        `;
+        hideBtn.title = "Hide domain";
         hideBtn.style.cursor = "pointer";
         hideBtn.style.background = "none";
         hideBtn.style.border = "none";
