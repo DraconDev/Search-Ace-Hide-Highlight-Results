@@ -8,7 +8,8 @@ export default defineContentScript({
     if (!window.location.href.includes("search?")) return;
 
     const processResults = async () => {
-      const { hiddenResults, highlightedResults } = await store.getValue();
+      const { hiddenResults, highlightedResults, suspended } = await store.getValue();
+      if (suspended) return;
       
       // Get all search result elements - try multiple selectors for different Google layouts
       const results = document.querySelectorAll('div.g, .g, .tF2Cxc, .MjjYud');
