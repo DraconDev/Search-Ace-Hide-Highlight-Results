@@ -157,11 +157,11 @@ export default defineContentScript({
             },
           });
           // Hide the element immediately
-          const resultElement = hideBtn.closest(
+          const clickedElement = hideBtn.closest(
             "div.g, .g, .tF2Cxc, .MjjYud"
           ) as HTMLElement;
-          if (resultElement) {
-            resultElement.style.display = "none";
+          if (clickedElement) {
+            clickedElement.style.display = "none";
           }
           // Store change listener will re-process and apply styles
         };
