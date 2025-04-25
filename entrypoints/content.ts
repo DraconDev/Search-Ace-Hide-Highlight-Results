@@ -72,7 +72,7 @@ export default defineContentScript({
 
         // Add hide button
         const hideBtn = document.createElement("button");
-        hideBtn.innerHTML = "◎"; // Minimalistic eye/circle outline
+        hideBtn.innerHTML = "✕"; // Minimalistic close/hide symbol
         hideBtn.title = "Hide this result";
         hideBtn.style.cursor = "pointer";
         hideBtn.style.background = "none";
