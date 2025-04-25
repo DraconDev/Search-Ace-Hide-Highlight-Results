@@ -61,9 +61,9 @@ function App() {
   };
 
   return (
-    <div className="min-w-[320px] p-4 bg-white shadow-xl">
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-lg font-bold">Search Result Manager</h1>
+    <div className="min-w-[320px] p-6 bg-gray-800 text-gray-200 rounded-xl shadow-lg">
+      <div className="flex items-center justify-between pb-4 mb-6 border-b border-gray-700">
+        <h1 className="text-xl font-bold text-white">Search Result Manager</h1>
         <button
           onClick={toggleSuspended}
           className={`px-3 py-1 rounded ${
@@ -75,13 +75,13 @@ function App() {
       </div>
 
       <div className="mb-6">
-        <h2 className="mb-2 font-semibold">Hidden Results</h2>
+        <h2 className="mb-2 font-semibold text-gray-300">Hidden Results</h2>
         <div className="flex gap-2 mb-2">
           <input
             type="text"
             id="hiddenPattern"
             placeholder="URL pattern to hide"
-            className="flex-1 p-2 border rounded"
+            className="flex-1 p-2 text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded"
           />
           <button
             onClick={() => {
@@ -102,14 +102,14 @@ function App() {
           {Object.keys(state.hiddenResults).map((pattern) => (
             <li
               key={pattern}
-              className="flex items-center justify-between p-2 transition-colors bg-white rounded-lg shadow-sm hover:bg-gray-50"
+              className="flex items-center justify-between p-2 transition-colors bg-gray-700 rounded-lg shadow-sm hover:bg-gray-600"
             >
               <span className="text-sm font-mono truncate max-w-[200px]">
                 {pattern}
               </span>
               <button
                 onClick={() => removeHiddenPattern(pattern)}
-                className="px-2 py-1 text-red-500 transition-colors rounded-md hover:bg-red-50"
+                className="px-2 py-1 text-red-400 transition-colors rounded-md hover:bg-red-900 hover:text-red-200"
               >
                 Remove
               </button>
@@ -119,7 +119,7 @@ function App() {
       </div>
 
       <div>
-        <h2 className="mb-2 text-sm font-semibold tracking-wide text-gray-600 uppercase">
+        <h2 className="mb-2 text-sm font-semibold tracking-wide text-gray-400 uppercase">
           Highlighted Results
         </h2>
         <div className="flex gap-2 mb-2">
@@ -127,7 +127,7 @@ function App() {
             type="text"
             id="highlightPattern"
             placeholder="URL pattern to highlight"
-            className="flex-1 p-2 border rounded"
+            className="flex-1 p-2 text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded"
           />
           <input
             type="color"
@@ -157,20 +157,20 @@ function App() {
           {Object.entries(state.highlightedResults).map(([pattern, color]) => (
             <li
               key={pattern}
-              className="flex items-center justify-between p-2 transition-colors bg-white rounded-lg shadow-sm hover:bg-gray-50"
+              className="flex items-center justify-between p-2 transition-colors bg-gray-700 rounded-lg shadow-sm hover:bg-gray-600"
             >
               <div className="flex items-center gap-2">
                 <span className="text-sm font-mono truncate max-w-[180px]">
                   {pattern}
                 </span>
                 <span
-                  className="inline-block w-5 h-5 border-2 border-gray-200 rounded-full"
+                  className="inline-block w-5 h-5 border-2 border-gray-600 rounded-full"
                   style={{ backgroundColor: color }}
                 />
               </div>
               <button
                 onClick={() => removeHighlightedPattern(pattern)}
-                className="px-2 py-1 text-red-500 transition-colors rounded-md hover:bg-red-50"
+                className="px-2 py-1 text-red-400 transition-colors rounded-md hover:bg-red-900 hover:text-red-200"
               >
                 Remove
               </button>
