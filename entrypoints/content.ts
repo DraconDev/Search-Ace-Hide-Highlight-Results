@@ -24,18 +24,32 @@ export default defineContentScript({
 
         console.log("Processing result with URL:", url);
 
-        // Check if buttons already exist for this result
-        if (result.querySelector('.search-result-actions')) {
-          return;
-        }
+        // Remove any existing highlight styles before re-applying
+        (result as HTMLElement).style.borderLeft = "";
+        (result as HTMLElement).style.paddingLeft = "";
+        (result as HTMLElement).style.display = ""; // Ensure result is visible by default
 
         // Check if URL matches any hidden patterns
         for (const pattern in hiddenResults) {
           if (url.includes(pattern)) {
             (result as HTMLElement).style.display = "none";
-            return;
+            return; // Skip adding buttons and highlighting if hidden
           }
         }
+
+        // Check if buttons already exist for this result
+        if (result.querySelector('.search-result-actions')) {
+          // If buttons exist, just ensure highlighting is correct and continue to next result
+          for (const [pattern, color] of Object.entries(highlightedResults)) {
+            if (url.includes(pattern)) {
+              (result as HTMLElement).style.borderLeft = `3px solid ${color}`;
+              (result as HTMLElement).style.paddingLeft = "8px";
+              break;
+            }
+          }
+          return;
+        }
+
 
         // Add action buttons container
         const actions = document.createElement("div");
@@ -64,9 +78,7 @@ export default defineContentScript({
               [url]: defaultHighlightColor,
             },
           });
-          // Immediately apply highlight style
-          (result as HTMLElement).style.borderLeft = `3px solid ${defaultHighlightColor}`;
-          (result as HTMLElement).style.paddingLeft = "8px";
+          // Store change listener will re-process and apply styles
         };
         actions.appendChild(highlightBtn);
 
@@ -89,8 +101,7 @@ export default defineContentScript({
               [url]: true,
             },
           });
-          // Immediately hide the result
-          (result as HTMLElement).style.display = "none";
+          // Store change listener will re-process and apply styles
         };
         actions.appendChild(hideBtn);
 
@@ -104,7 +115,7 @@ export default defineContentScript({
         resultElement.appendChild(actions); // Append actions to the main result element
 
 
-        // Check if URL matches any highlighted patterns
+        // Check if URL matches any highlighted patterns (this is also done above if buttons already exist)
         for (const [pattern, color] of Object.entries(highlightedResults)) {
           if (url.includes(pattern)) {
             (result as HTMLElement).style.borderLeft = `3px solid ${color}`;
