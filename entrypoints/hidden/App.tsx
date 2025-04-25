@@ -50,6 +50,17 @@ function App() {
             id="hiddenPattern"
             placeholder="URL pattern to hide"
             className="flex-1 p-2 text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded"
+            onKeyPress={(event) => {
+              if (event.key === 'Enter') {
+                const input = document.getElementById(
+                  "hiddenPattern"
+                ) as HTMLInputElement;
+                if (input.value) {
+                  addHiddenPattern(input.value);
+                  input.value = "";
+                }
+              }
+            }}
           />
           <button
             onClick={() => {
