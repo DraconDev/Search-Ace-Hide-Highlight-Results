@@ -52,9 +52,24 @@ function App() {
     });
   };
 
+  const toggleSuspended = () => {
+    store.setValue({
+      ...state,
+      suspended: !state.suspended
+    });
+  };
+
   return (
     <div className="min-w-[300px] p-4 bg-gray-100">
-      <h1 className="mb-4 text-lg font-bold">Search Result Manager</h1>
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="text-lg font-bold">Search Result Manager</h1>
+        <button
+          onClick={toggleSuspended}
+          className={`px-3 py-1 rounded ${state.suspended ? 'bg-green-500' : 'bg-yellow-500'} text-white`}
+        >
+          {state.suspended ? 'Resume' : 'Suspend'}
+        </button>
+      </div>
       
       <div className="mb-6">
         <h2 className="mb-2 font-semibold">Hidden Results</h2>
