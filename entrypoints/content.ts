@@ -134,8 +134,9 @@ export default defineContentScript({
         resultElement.appendChild(actions); // Append actions to the main result element
 
         // Check if URL matches any highlighted patterns
+        // Check if domain matches any highlighted patterns
         for (const [pattern, color] of Object.entries(highlightedResults)) {
-          if (url.includes(pattern)) {
+          if (domain.includes(pattern)) {
             const resultElement = result as HTMLElement;
             resultElement.style.borderLeft = `3px solid ${color}`;
             resultElement.style.paddingLeft = "8px";
