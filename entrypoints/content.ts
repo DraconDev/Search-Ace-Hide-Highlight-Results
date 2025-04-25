@@ -8,50 +8,44 @@ export default defineContentScript({
     if (!window.location.href.includes("search?")) return;
 
     const processResults = async () => {
-      console.log('Processing search results...');
-      const { hiddenResults, highlightedResults, suspended } = await store.getValue();
-      if (suspended) {
-        console.log('Extension is suspended, skipping');
-        return;
-      }
-      
+      const { hiddenResults, highlightedResults, suspended } =
+        await store.getValue();
+      if (suspended) return;
+
       // Get all search result elements - try multiple selectors for different Google layouts
-      const results = document.querySelectorAll('div.g, .g, .tF2Cxc, .MjjYud');
-      
+      const results = document.querySelectorAll("div.g, .g, .tF2Cxc, .MjjYud");
+
       results.forEach((result) => {
-        const link = result.querySelector('a[href]');
+        const link = result.querySelector("a[href]");
         if (!link) return;
-        
-        const url = link.getAttribute('href');
-        if (!url) {
-          console.log('No URL found for result');
-          return;
-        }
-        
-        console.log('Processing result with URL:', url);
-        
+
+        const url = link.getAttribute("href");
+        if (!url) return;
+
+        console.log("Processing result with URL:", url);
+
         // Check if URL matches any hidden patterns
         for (const pattern in hiddenResults) {
           if (url.includes(pattern)) {
-            (result as HTMLElement).style.display = 'none';
+            (result as HTMLElement).style.display = "none";
             return;
           }
         }
-        
+
         // Add action buttons container
-        const actions = document.createElement('div');
-        actions.style.display = 'flex';
-        actions.style.gap = '8px';
-        actions.style.marginTop = '4px';
-        
+        const actions = document.createElement("div");
+        actions.style.display = "flex";
+        actions.style.gap = "8px";
+        actions.style.marginTop = "4px";
+
         // Add highlight button
-        const highlightBtn = document.createElement('button');
-        highlightBtn.innerHTML = '🌟';
-        highlightBtn.title = 'Highlight with default color';
-        highlightBtn.style.cursor = 'pointer';
-        highlightBtn.style.background = 'none';
-        highlightBtn.style.border = 'none';
-        highlightBtn.style.padding = '0';
+        const highlightBtn = document.createElement("button");
+        highlightBtn.innerHTML = "🌟";
+        highlightBtn.title = "Highlight with default color";
+        highlightBtn.style.cursor = "pointer";
+        highlightBtn.style.background = "none";
+        highlightBtn.style.border = "none";
+        highlightBtn.style.padding = "0";
         highlightBtn.onclick = async (e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -61,20 +55,20 @@ export default defineContentScript({
             ...current,
             highlightedResults: {
               ...current.highlightedResults,
-              [url]: defaultHighlightColor
-            }
+              [url]: defaultHighlightColor,
+            },
           });
         };
         actions.appendChild(highlightBtn);
-        
+
         // Add hide button
-        const hideBtn = document.createElement('button');
-        hideBtn.innerHTML = '👁️';
-        hideBtn.title = 'Hide this result';
-        hideBtn.style.cursor = 'pointer';
-        hideBtn.style.background = 'none';
-        hideBtn.style.border = 'none';
-        hideBtn.style.padding = '0';
+        const hideBtn = document.createElement("button");
+        hideBtn.innerHTML = "👁️";
+        hideBtn.title = "Hide this result";
+        hideBtn.style.cursor = "pointer";
+        hideBtn.style.background = "none";
+        hideBtn.style.border = "none";
+        hideBtn.style.padding = "0";
         hideBtn.onclick = async (e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -83,26 +77,23 @@ export default defineContentScript({
             ...current,
             hiddenResults: {
               ...current.hiddenResults,
-              [url]: true
-            }
+              [url]: true,
+            },
           });
         };
         actions.appendChild(hideBtn);
-        
+
         // Insert buttons after the result title
-        const title = result.querySelector('h3')?.parentElement;
+        const title = result.querySelector("h3")?.parentElement;
         if (title) {
-          console.log('Adding action buttons for:', url);
           title.appendChild(actions);
-        } else {
-          console.log('Could not find title element for result');
         }
-        
+
         // Check if URL matches any highlighted patterns
         for (const [pattern, color] of Object.entries(highlightedResults)) {
           if (url.includes(pattern)) {
             (result as HTMLElement).style.borderLeft = `3px solid ${color}`;
-            (result as HTMLElement).style.paddingLeft = '8px';
+            (result as HTMLElement).style.paddingLeft = "8px";
             break;
           }
         }
@@ -111,10 +102,10 @@ export default defineContentScript({
 
     // Run initially
     processResults();
-    
+
     // Watch for store changes
     browser.storage.onChanged.addListener((changes, areaName) => {
-      if (areaName === 'sync' && changes['sync:store']) {
+      if (areaName === "sync" && changes["sync:store"]) {
         processResults();
       }
     });
@@ -123,7 +114,7 @@ export default defineContentScript({
     const observer = new MutationObserver(processResults);
     observer.observe(document.body, {
       childList: true,
-      subtree: true
+      subtree: true,
     });
   },
 });

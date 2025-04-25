@@ -5,7 +5,7 @@ export default defineConfig({
   manifest: {
     name: "Example Extension",
     description: "Example Extension",
-    version: "0.0.151",
+    version: "0.0.152",
     permissions: ["storage"],
     icons: {
       "16": "icon/16.png",
