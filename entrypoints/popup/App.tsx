@@ -74,19 +74,109 @@ function App() {
         </button>
       </div>
 
-      <div className="flex flex-col gap-4">
-        <button
-          onClick={() => chrome.runtime.sendMessage({ action: "openHiddenPage" })}
-          className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600"
-        >
-          Manage Hidden Results
-        </button>
-        <button
-          onClick={() => chrome.runtime.sendMessage({ action: "openHighlightPage" })}
-          className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
-        >
-          Manage Highlighted Results
-        </button>
+      <div className="mb-6">
+        <h2 className="mb-2 font-semibold text-gray-300">Hidden Results</h2>
+        <div className="flex gap-2 mb-2">
+          <input
+            type="text"
+            id="hiddenPattern"
+            placeholder="URL pattern to hide"
+            className="flex-1 p-2 text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded"
+          />
+          <button
+            onClick={() => {
+              const input = document.getElementById(
+                "hiddenPattern"
+              ) as HTMLInputElement;
+              if (input.value) {
+                addHiddenPattern(input.value);
+                input.value = "";
+              }
+            }}
+            className="px-3 py-1 text-white bg-red-500 rounded"
+          >
+            Add
+          </button>
+        </div>
+        <ul className="space-y-2">
+          {Object.keys(state.hiddenResults).map((pattern) => (
+            <li
+              key={pattern}
+              className="flex items-center justify-between p-2 mb-2 transition-colors bg-gray-700 rounded-lg shadow-sm hover:bg-gray-600"
+            >
+              <span className="text-sm font-mono truncate max-w-[200px] text-gray-100">
+                {pattern}
+              </span>
+              <button
+                onClick={() => removeHiddenPattern(pattern)}
+                className="px-2 py-1 text-red-400 transition-colors rounded-md hover:bg-red-900 hover:text-red-200"
+              >
+                Remove
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h2 className="mb-2 text-sm font-semibold tracking-wide text-gray-300 uppercase">
+          Highlighted Results
+        </h2>
+        <div className="flex gap-2 mb-2">
+          <input
+            type="text"
+            id="highlightPattern"
+            placeholder="URL pattern to highlight"
+            className="flex-1 p-2 text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded"
+          />
+          <input
+            type="color"
+            id="highlightColor"
+            defaultValue="#00ff00"
+            className="w-10 h-10"
+          />
+          <button
+            onClick={() => {
+              const patternInput = document.getElementById(
+                "highlightPattern"
+              ) as HTMLInputElement;
+              const colorInput = document.getElementById(
+                "highlightColor"
+              ) as HTMLInputElement;
+              if (patternInput.value) {
+                addHighlightedPattern(patternInput.value, colorInput.value);
+                patternInput.value = "";
+              }
+            }}
+            className="px-3 py-1 text-white bg-blue-700 rounded hover:bg-blue-600 hover:text-white"
+          >
+            Add
+          </button>
+        </div>
+        <ul className="space-y-2">
+          {Object.entries(state.highlightedResults).map(([pattern, color]) => (
+            <li
+              key={pattern}
+              className="flex items-center justify-between p-2 mb-2 transition-colors bg-gray-700 rounded-lg shadow-sm hover:bg-gray-600"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-mono truncate max-w-[180px] text-gray-100">
+                  {pattern}
+                </span>
+                <span
+                  className="inline-block w-5 h-5 border-2 border-gray-500 rounded-full"
+                  style={{ backgroundColor: color }}
+                />
+              </div>
+              <button
+                onClick={() => removeHighlightedPattern(pattern)}
+                className="px-2 py-1 text-red-400 transition-colors rounded-md hover:bg-red-900 hover:text-red-200"
+              >
+                Remove
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
