@@ -41,7 +41,7 @@ function App() {
   return (
     <div className="min-w-[320px] p-6 bg-gray-900 text-gray-100 rounded-lg shadow-xl">
       <div className="flex items-center justify-between pb-4 mb-6 border-b border-gray-700">
-        <h1 className="text-xl font-bold text-white">Search Result Manager</h1>
+        <h1 className="text-xl font-bold text-white">Search Results Manager</h1>
         <button
           onClick={toggleSuspended}
           className={`px-4 py-2 rounded-md text-sm font-semibold transition-colors duration-200 ${
