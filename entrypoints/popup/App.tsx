@@ -39,13 +39,15 @@ function App() {
   };
 
   return (
-    <div className="p-6 text-gray-100 bg-gray-900 rounded-lg shadow-xl min-w-">
+    <div className="p-6 text-gray-100 bg-gray-900 rounded-lg shadow-xl min-w-screen">
       <div className="flex items-center justify-between pb-4 mb-6 border-b border-gray-700">
         <h1 className="text-xl font-bold text-white">Search Results Manager</h1>
         <button
           onClick={toggleSuspended}
           className={`px-4 py-2 rounded-md text-sm font-semibold transition-colors duration-200 ${
-            state.suspended ? "bg-green-600 hover:bg-green-700" : "bg-yellow-600 hover:bg-yellow-700"
+            state.suspended
+              ? "bg-green-600 hover:bg-green-700"
+              : "bg-yellow-600 hover:bg-yellow-700"
           } text-white`}
         >
           {state.suspended ? "Resume" : "Suspend"}
