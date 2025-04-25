@@ -30,12 +30,12 @@ function App() {
 
   const openHiddenPage = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    browser.tabs.create({ url: browser.runtime.getURL("hidden.html") });
+    browser.tabs.create({ url: browser.runtime.getURL("/hidden.html") });
   };
 
   const openHighlightPage = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    browser.tabs.create({ url: browser.runtime.getURL("highlight.html") });
+    browser.tabs.create({ url: browser.runtime.getURL("/highlight.html") });
   };
 
   return (
