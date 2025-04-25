@@ -119,7 +119,7 @@ function App() {
       </div>
 
       <div>
-        <h2 className="mb-2 text-sm font-semibold tracking-wide text-gray-400 uppercase">
+        <h2 className="mb-2 text-sm font-semibold tracking-wide text-gray-300 uppercase">
           Highlighted Results
         </h2>
         <div className="flex gap-2 mb-2">
@@ -157,7 +157,7 @@ function App() {
           {Object.entries(state.highlightedResults).map(([pattern, color]) => (
             <li
               key={pattern}
-              className="flex items-center justify-between p-2 transition-colors bg-gray-700 rounded-lg shadow-sm hover:bg-gray-600"
+              className="flex items-center justify-between p-2 mb-2 transition-colors bg-gray-700 rounded-lg shadow-sm hover:bg-gray-600"
             >
               <div className="flex items-center gap-2">
                 <span className="text-sm font-mono truncate max-w-[180px]">
