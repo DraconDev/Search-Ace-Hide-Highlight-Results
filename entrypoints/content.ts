@@ -24,9 +24,11 @@ export default defineContentScript({
         console.log('Processing result with URL:', url);
         
         // Check if URL matches any hidden patterns
-        if (hiddenResults.some(pattern => url.includes(pattern))) {
-          (result as HTMLElement).style.display = 'none';
-          return;
+        for (const pattern in hiddenResults) {
+          if (url.includes(pattern)) {
+            (result as HTMLElement).style.display = 'none';
+            return;
+          }
         }
         
         // Check if URL matches any highlighted patterns
