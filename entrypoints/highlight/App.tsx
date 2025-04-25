@@ -52,6 +52,20 @@ function App() {
             id="highlightPattern"
             placeholder="URL pattern to highlight"
             className="flex-1 p-2 text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded"
+            onKeyPress={(event) => {
+              if (event.key === 'Enter') {
+                const patternInput = document.getElementById(
+                  "highlightPattern"
+                ) as HTMLInputElement;
+                const colorInput = document.getElementById(
+                  "highlightColor"
+                ) as HTMLInputElement;
+                if (patternInput.value) {
+                  addHighlightedPattern(patternInput.value, colorInput.value);
+                  patternInput.value = "";
+                }
+              }
+            }}
           />
           <input
             type="color"
