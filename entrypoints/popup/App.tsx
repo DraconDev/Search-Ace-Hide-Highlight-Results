@@ -42,32 +42,34 @@ function App() {
     <div className="p-6 text-gray-100 bg-gray-900 rounded-lg shadow-xl min-w-screen">
       <div className="flex items-center justify-between pb-4 mb-6 border-b border-gray-700">
         <h1 className="text-xl font-bold text-white">Search Results Manager</h1>
-        <button
-          onClick={toggleSuspended}
-          className={`px-4 py-2 rounded-md text-sm font-semibold transition-colors duration-200 ${
-            state.suspended
-              ? "bg-green-600 hover:bg-green-700"
-              : "bg-yellow-600 hover:bg-yellow-700"
-          } text-white`}
-        >
-          {state.suspended ? "Resume" : "Suspend"}
-        </button>
       </div>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 mb-6">
         <a
           href="#"
           onClick={openHiddenPage}
-          className="text-base text-blue-400 hover:text-blue-300 hover:underline"
+          className="block w-full px-4 py-2 text-base font-semibold text-center text-white transition-colors duration-200 bg-blue-600 rounded-md hover:bg-blue-700"
         >
           Manage Hidden Results
         </a>
         <a
           href="#"
           onClick={openHighlightPage}
-          className="text-base text-blue-400 hover:text-blue-300 hover:underline"
+          className="block w-full px-4 py-2 text-base font-semibold text-center text-white transition-colors duration-200 bg-blue-600 rounded-md hover:bg-blue-700"
         >
           Manage Highlighted Results
         </a>
+      </div>
+      <div className="flex justify-center">
+        <button
+          onClick={toggleSuspended}
+          className={`px-4 py-2 rounded-md text-sm font-semibold transition-colors duration-200 ${
+            state.suspended
+              ? "bg-green-600 hover:bg-green-700"
+              : "bg-yellow-600 hover:bg-yellow-700"
+          } text-white w-full`}
+        >
+          {state.suspended ? "Resume" : "Suspend"}
+        </button>
       </div>
     </div>
   );
