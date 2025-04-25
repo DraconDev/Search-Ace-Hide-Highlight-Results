@@ -50,6 +50,63 @@ export default defineContentScript({
           e.stopPropagation();
           const { defaultHighlightColor } = await store.getValue();
           const current = await store.getValue();
+          await store.setValue({
+            ...current,
+            highlightedResults: {
+              ...current.highlightedResults,
+              [url]: defaultHighlightColor
+            }
+          });
+        };
+        actions.appendChild(highlightBtn);
+        
+        // Add hide button
+        const hideBtn = document.createElement('button');
+        hideBtn.innerHTML = '👁️';
+        hideBtn.title = 'Hide this result';
+        hideBtn.style.cursor = 'pointer';
+        hideBtn.style.background = 'none';
+        hideBtn.style.border = 'none';
+        hideBtn.style.padding = '0';
+        hideBtn.onclick = async (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const current = await store.getValue();
+          await store.setValue({
+            ...current,
+            hiddenResults: {
+              ...current.hiddenResults,
+              [url]: true
+            }
+          });
+        };
+        actions.appendChild(hideBtn);
+        
+        // Insert buttons after the result title
+        const title = result.querySelector('h3')?.parentElement;
+        if (title) {
+          title.appendChild(actions);
+        }
+        
+        // Check if URL matches any highlighted patterns
+        for (const [pattern, color] of Object.entries(highlightedResults)) {
+          if (url.includes(pattern)) {
+            (result as HTMLElement).style.borderLeft = `3px solid ${color}`;
+            (result as HTMLElement).style.paddingLeft = '8px';
+            break;
+          }
+        }
+      });
+    };
+
+    // Run initially
+    processResults();
+    
+    // Watch for store changes
+    browser.storage.onChanged.addListener((changes, areaName) => {
+      if (areaName === 'sync' && changes['sync:store']) {
+        processResults();
+      }
     });
 
     // Watch for dynamic result loading
