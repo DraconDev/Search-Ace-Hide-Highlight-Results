@@ -1,3 +1,7 @@
+:start_line:1
+-------
+![3.png](3.png)
+
 # Search Results Manager
 
 This extension helps you manage your search results by allowing you to hide and highlight specific results.
