@@ -151,21 +151,24 @@ function App() {
             Add
           </button>
         </div>
-        <ul className="space-y-1">
+        <ul className="space-y-2">
           {Object.entries(state.highlightedResults).map(([pattern, color]) => (
-            <li key={pattern} className="flex items-center justify-between">
+            <li 
+              key={pattern} 
+              className="flex items-center justify-between p-2 transition-colors bg-white rounded-lg shadow-sm hover:bg-gray-50"
+            >
               <div className="flex items-center gap-2">
-                <span>{pattern}</span>
-                <span
-                  className="inline-block w-4 h-4 border border-gray-300 rounded-full"
+                <span className="text-sm font-mono truncate max-w-[180px]">{pattern}</span>
+                <span 
+                  className="inline-block w-5 h-5 border-2 border-gray-200 rounded-full"
                   style={{ backgroundColor: color }}
                 />
               </div>
-              <button
+              <button 
                 onClick={() => removeHighlightedPattern(pattern)}
-                className="text-red-500"
+                className="px-2 py-1 text-red-500 transition-colors rounded-md hover:bg-red-50"
               >
-                ×
+                Remove
               </button>
             </li>
           ))}
