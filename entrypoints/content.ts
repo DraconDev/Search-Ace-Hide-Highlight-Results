@@ -114,14 +114,14 @@ export default defineContentScript({
         for (const [pattern, color] of Object.entries(highlightedResults)) {
           if (url.includes(pattern)) {
             const resultElement = result as HTMLElement;
-            // Check if the element is already highlighted
-            if (resultElement.style.borderLeft !== `3px solid ${color}`) {
-              resultElement.style.borderLeft = `3px solid ${color}`;
-              resultElement.style.paddingLeft = "8px";
-            }
+            resultElement.style.borderLeft = `3px solid ${color}`;
+            resultElement.style.paddingLeft = "8px";
             break;
           }
         }
+
+        // Mark the result as processed
+        resultElement.classList.add("processed-result");
       });
     };
 
