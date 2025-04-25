@@ -13,7 +13,7 @@ export default defineContentScript({
       if (suspended) return;
 
       // Get all search result elements - try multiple selectors for different Google layouts
-      const results = document.querySelectorAll("div.g, .g, .tF2Cxc, .MjjYud");
+      const results = document.querySelectorAll(".MjjYud > div.g");
 
       results.forEach((result) => {
         const resultElement = result as HTMLElement;
