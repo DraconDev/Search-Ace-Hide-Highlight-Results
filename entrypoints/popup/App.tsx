@@ -102,9 +102,9 @@ function App() {
           {Object.keys(state.hiddenResults).map((pattern) => (
             <li
               key={pattern}
-              className="flex items-center justify-between p-2 transition-colors bg-gray-700 rounded-lg shadow-sm hover:bg-gray-600"
+              className="flex items-center justify-between p-2 mb-2 transition-colors bg-gray-700 rounded-lg shadow-sm hover:bg-gray-600"
             >
-              <span className="text-sm font-mono truncate max-w-[200px]">
+              <span className="text-sm font-mono truncate max-w-[200px] text-gray-100">
                 {pattern}
               </span>
               <button
@@ -160,7 +160,7 @@ function App() {
               className="flex items-center justify-between p-2 mb-2 transition-colors bg-gray-700 rounded-lg shadow-sm hover:bg-gray-600"
             >
               <div className="flex items-center gap-2">
-                <span className="text-sm font-mono truncate max-w-[180px]">
+                <span className="text-sm font-mono truncate max-w-[180px] text-gray-100">
                   {pattern}
                 </span>
                 <span
