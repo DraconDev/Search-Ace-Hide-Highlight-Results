@@ -45,7 +45,7 @@ function App() {
           Search Results Manager
         </h1>
       </div>
-      <div className="flex flex-col gap-3 mb-4">
+      <div className="flex flex-col gap-4 mb-6">
         <a
           href="#"
           onClick={openHiddenPage}
@@ -61,12 +61,12 @@ function App() {
           Highlighted Results
         </a>
       </div>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-4">
         <button
           onClick={toggleSuspended}
           className={`px-4 py-2 rounded-md text-base font-semibold transition-colors duration-200 ${
             state.suspended
-              ? "bg-green-600 hover:bg-green-700"
+              ? "bg-gray-600 hover:bg-gray-700"
               : "bg-yellow-600 hover:bg-yellow-700"
           } text-white w-full`}
         >
