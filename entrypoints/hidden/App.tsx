@@ -37,19 +37,19 @@ function App() {
   };
 
   return (
-    <div className="min-w-[320px] p-6 bg-gray-800 text-gray-200 rounded-xl shadow-lg">
+    <div className="min-w-[400px] p-8 bg-gray-900 text-gray-100 rounded-lg shadow-xl mx-auto my-8">
       <div className="flex items-center justify-between pb-4 mb-6 border-b border-gray-700">
-        <h1 className="text-lg font-bold text-white">Hidden Result Manager</h1>
+        <h1 className="text-2xl font-bold text-white">Hidden Result Manager</h1>
       </div>
 
       <div className="mb-6">
-        <h2 className="mb-2 font-semibold text-gray-300">Hidden Results</h2>
-        <div className="flex gap-2 mb-2">
+        <h2 className="mb-3 text-lg font-semibold text-gray-300">Add Hidden Pattern</h2>
+        <div className="flex gap-3 mb-4">
           <input
             type="text"
             id="hiddenPattern"
-            placeholder="URL pattern to hide"
-            className="flex-1 p-2 text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded"
+            placeholder="Enter URL pattern to hide"
+            className="flex-1 p-3 text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
             onKeyPress={(event) => {
               if (event.key === 'Enter') {
                 const input = document.getElementById(
@@ -72,23 +72,24 @@ function App() {
                 input.value = "";
               }
             }}
-            className="px-3 py-1 text-white bg-red-500 rounded"
+            className="px-5 py-3 text-white transition-colors duration-200 bg-red-600 rounded-md hover:bg-red-700"
           >
             Add
           </button>
         </div>
-        <ul className="space-y-2">
+        <h2 className="mb-3 text-lg font-semibold text-gray-300">Hidden Patterns</h2>
+        <ul className="space-y-3">
           {Object.keys(state.hiddenResults).map((pattern) => (
             <li
               key={pattern}
-              className="flex items-center justify-between p-2 mb-2 transition-colors bg-gray-700 rounded-lg shadow-sm hover:bg-gray-600"
+              className="flex items-center justify-between p-3 transition-colors bg-gray-700 rounded-lg shadow-sm hover:bg-gray-600"
             >
-              <span className="text-sm font-mono truncate max-w-[200px] text-gray-100">
+              <span className="text-base font-mono truncate max-w-[250px] text-gray-100">
                 {pattern}
               </span>
               <button
                 onClick={() => removeHiddenPattern(pattern)}
-                className="px-2 py-1 text-red-400 transition-colors rounded-md hover:bg-red-900 hover:text-red-200"
+                className="px-3 py-1 text-sm text-red-400 transition-colors rounded-md hover:bg-red-900 hover:text-red-200"
               >
                 Remove
               </button>
