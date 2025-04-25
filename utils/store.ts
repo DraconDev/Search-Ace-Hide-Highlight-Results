@@ -2,7 +2,7 @@ import { Store } from "@/types/types";
 
 export const defaultStore: Store = {
     env: "",
-    hiddenResults: [],
+    hiddenResults: {},
     highlightedResults: {},
     suspended: false
 };
