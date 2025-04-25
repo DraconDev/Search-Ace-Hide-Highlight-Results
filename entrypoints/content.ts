@@ -10,8 +10,8 @@ export default defineContentScript({
     const processResults = async () => {
       const { hiddenResults, highlightedResults } = await store.getValue();
       
-      // Get all search result elements
-      const results = document.querySelectorAll('div.g');
+      // Get all search result elements - try multiple selectors for different Google layouts
+      const results = document.querySelectorAll('div.g, .g, .tF2Cxc, .MjjYud');
       
       results.forEach((result) => {
         const link = result.querySelector('a[href]');
@@ -19,6 +19,8 @@ export default defineContentScript({
         
         const url = link.getAttribute('href');
         if (!url) return;
+        
+        console.log('Processing result with URL:', url);
         
         // Check if URL matches any hidden patterns
         if (hiddenResults.some(pattern => url.includes(pattern))) {
