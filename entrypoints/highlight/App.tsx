@@ -70,7 +70,7 @@ function App() {
           <input
             type="text"
             id="highlightPattern"
-            placeholder="Enter URL regex pattern to highlight"
+            placeholder="Enter URL pattern to highlight"
             className="flex-1 p-3 text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             onKeyPress={(event) => {
               if (event.key === "Enter") {
@@ -112,11 +112,8 @@ function App() {
             Add
           </button>
         </div>
-        <p className="mt-1 mb-4 text-sm text-gray-400">
-          Use JavaScript-compatible regular expressions for patterns.
-        </p>
         <h2 className="mb-3 text-lg font-semibold text-gray-300">
-          Currently Highlighted Regex Patterns
+          Currently Highlighted Patterns
         </h2>
         <ul className="space-y-3">
           {Object.entries(state.highlightedResults).map(([pattern, color]) => (
