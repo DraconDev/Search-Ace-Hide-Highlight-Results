@@ -164,7 +164,9 @@ export default defineContentScript({
           const clickedElement = hideBtn.closest(
             "div.g, .g, .tF2Cxc, .MjjYud"
           ) as HTMLElement;
-          // Visibility will be updated in processResults
+          if (clickedElement) {
+            clickedElement.style.display = "none";
+          }
           // Store change listener will re-process and apply styles
         };
         actions.appendChild(hideBtn);
