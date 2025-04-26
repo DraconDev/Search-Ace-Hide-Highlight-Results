@@ -190,6 +190,11 @@ export default defineContentScript({
         for (const [pattern, color] of Object.entries(highlightedResults)) {
           if (domain.includes(pattern)) {
             const resultElement = result as HTMLElement;
+            // Check if an ancestor already has a highlight border
+            if (resultElement.closest('[style*="border-left:"]')) {
+              console.log("Skipping highlight on nested element:", resultElement);
+              break; // Skip applying highlight to this element
+            }
             // Remove existing highlight before applying a new one to prevent double borders
             resultElement.style.borderLeft = "";
             resultElement.style.paddingLeft = "";
