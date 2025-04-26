@@ -64,6 +64,19 @@ export default defineContentScript({
           }
         }
 
+        // Check if domain matches any highlighted patterns
+        for (const [pattern, color] of Object.entries(highlightedResults)) {
+          if (domain.includes(pattern)) {
+            const resultElement = result as HTMLElement;
+            // Remove existing highlight before applying a new one to prevent double borders
+            resultElement.style.borderLeft = "";
+            resultElement.style.paddingLeft = "";
+            resultElement.style.borderLeft = `3px solid ${color}`;
+            resultElement.style.paddingLeft = "8px";
+            break;
+          }
+        }
+
         // Add action buttons container
         const actions = document.createElement("div");
         actions.classList.add("search-result-actions"); // Add a class for identification
@@ -185,19 +198,6 @@ export default defineContentScript({
         (actions as HTMLElement).style.top = "0";
         (actions as HTMLElement).style.zIndex = "1000";
         resultElement.appendChild(actions);
-
-        // Check if domain matches any highlighted patterns
-        for (const [pattern, color] of Object.entries(highlightedResults)) {
-          if (domain.includes(pattern)) {
-            const resultElement = result as HTMLElement;
-            // Remove existing highlight before applying a new one to prevent double borders
-            resultElement.style.borderLeft = "";
-            resultElement.style.paddingLeft = "";
-            resultElement.style.borderLeft = `3px solid ${color}`;
-            resultElement.style.paddingLeft = "8px";
-            break;
-          }
-        }
 
         // Mark the result as processed
         resultElement.classList.add("processed-result");
