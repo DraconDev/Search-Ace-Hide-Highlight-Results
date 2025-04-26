@@ -21,10 +21,16 @@ function App() {
 
   if (!state) return <div>Loading...</div>;
 
-  const toggleSuspended = () => {
-    store.setValue({
+  const toggleSuspended = async () => {
+    await store.setValue({
       ...state,
       suspended: !state.suspended,
+    });
+    // Reload the active tab after updating the store
+    browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+      if (tabs[0]) {
+        browser.tabs.reload(tabs[0].id);
+      }
     });
   };
 
